@@ -9,7 +9,7 @@ class ErrorListener extends Listener {
         });
     }
 
-    exec(message, err) {
+    exec(err, message) {
         message.util.send([
             'An error occured:',
             '```',
