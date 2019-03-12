@@ -1,12 +1,12 @@
 const Language = require('../struct/Language');
 
-class Fsharp extends Language {
+class FSharp extends Language {
     constructor() {
-        super('fsharp', {
+        super('FSharp', {
             highlight: 'fs',
-            aliases: ['fsharp', 'fs']
+            aliases: ['fsharp', 'f#', 'fs']
         });
     }
 }
 
-module.exports = Fsharp;
+module.exports = FSharp;
