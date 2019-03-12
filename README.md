@@ -32,8 +32,6 @@ With options:
 >[options]`lang code`
 ````
 
-Where `lang` is a language code and `options` is a list of options.
-
 ### Examples
 
 ````
