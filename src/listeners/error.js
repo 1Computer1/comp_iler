@@ -10,7 +10,11 @@ class ErrorListener extends Listener {
     }
 
     exec(err, message) {
-        message.util.send([
+        if (message.guild && !message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES')) {
+            return null;
+        }
+
+        return message.util.send([
             'An error occured:',
             '```',
             err.toString(),

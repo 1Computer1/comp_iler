@@ -7,6 +7,7 @@ class EvalCommand extends Command {
             aliases: ['eval', 'e'],
             ownerOnly: true,
             quoted: false,
+            clientPermissions: ['SEND_MESSAGES'],
             args: [
                 {
                     id: 'code',

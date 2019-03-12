@@ -11,6 +11,10 @@ class MessageInvalidListener extends Listener {
     }
 
     async exec(message) {
+        if (message.guild && !message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES')) {
+            return null;
+        }
+
         const parse = this.parseMessage(message);
         if (!parse) {
             return null;
