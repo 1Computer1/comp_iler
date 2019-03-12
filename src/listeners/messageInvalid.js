@@ -72,6 +72,10 @@ class MessageInvalidListener extends Listener {
         const valid = new Map();
         const invalid = [];
         for (const [key, value] of kvs) {
+            if (!key) {
+                continue;
+            }
+
             const ok = Object.prototype.hasOwnProperty.call(language.options, key) && language.options[key](value);
             if (ok) {
                 valid.set(key, value);
