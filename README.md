@@ -62,6 +62,7 @@ One of the following languages is set in `lang`.
 - `js` JavaScript (Node 10.14.2)
 - `py` Python (CPython 3.6.8)
 - `hs` Haskell (GHC 8.4.3)
+- `fs` Fsharp (F# 4.5)
 
 ## Options
 
@@ -74,6 +75,9 @@ For Python:
 - None
 
 For Haskell:
+- None
+
+For Fsharp:
 - None
 
 ## Packages
@@ -100,3 +104,6 @@ For Haskell:
 - scientific
 - split
 - vector
+
+For Fsharp:
+- None
