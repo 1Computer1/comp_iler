@@ -1,0 +1,16 @@
+{
+  "name": "comp_iler",
+  "version": "1.0.0",
+  "description": "Sandboxed eval bot",
+  "main": "index.js",
+  "author": "1Computer1",
+  "license": "MIT",
+  "dependencies": {
+    "discord-akairo": "^8.0.0-beta.1",
+    "discord.js": "github:discordjs/discord.js",
+    "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.1"
+  }
+}
