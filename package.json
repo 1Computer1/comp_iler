@@ -2,7 +2,7 @@
   "name": "comp_iler",
   "version": "1.0.0",
   "description": "Sandboxed eval bot",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "1Computer1",
   "license": "MIT",
   "dependencies": {
