@@ -19,13 +19,14 @@ class MessageInvalidListener extends Listener {
         const result = await this.client.languageHandler.evalCode(message, parse)
             .catch(e => e.message) || '\n';
 
-        const output = `\`\`\`${parse.language.highlight}\n${result}\`\`\``;
+        const invalid = parse.invalid.length ? `Invalid options: ${parse.invalid.join(', ')}\n` : '';
+        const output = `${invalid}\`\`\`${parse.language.highlight}\n${result}\`\`\``;
         if (output.length >= 2000) {
             const key = await fetch('https://hastebin.com/documents', { method: 'POST', body: result })
                 .then(res => res.json())
                 .then(json => json.key);
 
-            return message.util.send(`https://hastebin.com/${key}.js`);
+            return message.util.send(`${invalid}Output was too long: <https://hastebin.com/${key}.js>`);
         }
 
         return message.util.send(output);
@@ -45,8 +46,8 @@ class MessageInvalidListener extends Listener {
         }
 
         const code = match[3].trim();
-        const options = this.parseOptions(language, match[1] || '');
-        return { id: message.id, language, code, options };
+        const [valid, invalid] = this.parseOptions(language, match[1] || '');
+        return { id: message.id, language, code, options: valid, invalid };
     }
 
     parseLanguage(language) {
@@ -59,13 +60,23 @@ class MessageInvalidListener extends Listener {
     }
 
     parseOptions(language, options) {
-        return new Map(options.split(';')
-            .map(opt => {
-                const [k, v = ''] = opt.split('=');
-                return [k.toLowerCase().trim(), v.trim()];
-            })
-            .filter(([key, value]) =>
-                Object.prototype.hasOwnProperty.call(language.options, key) && language.options[key](value)));
+        const kvs = options.split(';').map(opt => {
+            const [k, v = ''] = opt.split('=');
+            return [k.toLowerCase().trim(), v.trim()];
+        });
+
+        const valid = new Map();
+        const invalid = [];
+        for (const [key, value] of kvs) {
+            const ok = Object.prototype.hasOwnProperty.call(language.options, key) && language.options[key](value);
+            if (ok) {
+                valid.set(key, value);
+            } else {
+                invalid.push(key);
+            }
+        }
+
+        return [valid, invalid];
     }
 }
 
