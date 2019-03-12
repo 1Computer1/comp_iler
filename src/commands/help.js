@@ -30,6 +30,7 @@ class HelpCommand extends Command {
             '- JavaScript',
             '- Python',
             '- Haskell',
+            '- Go',
             '',
             'Read the readme for more information: <https://github.com/1Computer1/comp_iler>'
         ]);
