@@ -68,6 +68,7 @@ One of the following languages is set in `lang`.
 - `hs` Haskell (GHC 8.6.3)
 - `pas` Pascal (FPC 3.0.4)
 - `go` Go (Go 1.12)
+- `fs` F# (FSharp 4.5)
 
 ## Options
 
@@ -87,4 +88,7 @@ For Pascal:
 - None
 
 For Go:
+- None
+
+For F#:
 - None
