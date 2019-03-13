@@ -63,6 +63,7 @@ One of the following languages is set in `lang`.
 - `py` Python (CPython 3.6.8)
 - `hs` Haskell (GHC 8.4.3)
 - `pas` Pascal (FPC 3.0.4)
+- `go` Go (Go 1.12)
 
 ## Options
 
@@ -79,6 +80,10 @@ For Haskell:
 
 For Pascal:
 - None
+
+For Go:
+- None
+
 
 ## Packages
 
@@ -106,4 +111,7 @@ For Haskell:
 - vector
 
 For Pascal:
+- None
+
+For Go:
 - None
