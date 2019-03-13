@@ -6,5 +6,8 @@
         "haskell",
         "python",
         "Leave empty to enable all languages"
-    ]
+    ],
+    "memory": "128m",
+    "cpus": "0.5",
+    "timeout": 10000
 }

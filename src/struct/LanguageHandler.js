@@ -65,7 +65,7 @@ class LanguageHandler extends AkairoHandler {
             const { id, env } = language.runWith(options);
             const proc = childProcess.spawn('docker', [
                 'run', '--rm', `--name=${name}`,
-                '--net=none', '--cpus=0.5', '-m=256m',
+                '--net=none', `--cpus=${this.client.config.cpus}`, `-m=${this.client.config.memory}`,
                 ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
                 `1computer1/comp_iler:${id}`,
                 '/bin/sh', '/var/run/run.sh', code
@@ -79,11 +79,11 @@ class LanguageHandler extends AkairoHandler {
                         childProcess.execSync(`docker kill --signal=9 ${name} >/dev/null 2>/dev/null`);
                     }
 
-                    reject(new Error('Evaluation timed out'));
+                    reject(new Error('Timed out'));
                 } catch (e) {
                     reject(e);
                 }
-            }, 10000);
+            }, this.client.config.timeout);
 
             let data = '';
             proc.stdout.on('data', chunk => {
