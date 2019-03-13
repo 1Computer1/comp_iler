@@ -59,9 +59,9 @@ console.log(new Foo().bar);
 
 One of the following languages is set in `lang`.
 
-- `js` JavaScript (Node 10.14.2)
-- `py` Python (CPython 3.6.8, CPython 2.7.15)
-- `hs` Haskell (GHC 8.4.3)
+- `js` JavaScript (Node 11.11.0)
+- `py` Python (CPython 3.7.2, CPython 2.7.16)
+- `hs` Haskell (GHC 8.6.3)
 - `pas` Pascal (FPC 3.0.4)
 - `go` Go (Go 1.12)
 

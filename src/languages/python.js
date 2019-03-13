@@ -5,7 +5,7 @@ class Python extends Language {
         super('python', {
             highlight: 'py',
             aliases: ['python', 'py'],
-            loads: ['python', 'python2'],
+            loads: ['python3', 'python2'],
             options: {
                 2: () => ''
             }
@@ -17,7 +17,7 @@ class Python extends Language {
             return { id: 'python2', env: {} };
         }
 
-        return { id: 'python', env: {} };
+        return { id: 'python3', env: {} };
     }
 }
 

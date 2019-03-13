@@ -1,8 +1,5 @@
-FROM alpine
+FROM python:2-alpine
 LABEL author="1Computer1"
-
-RUN apk update
-RUN apk add build-base python2
 
 COPY run.sh /var/run/
 WORKDIR /var/ws
