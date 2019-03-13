@@ -20,8 +20,29 @@ class MessageInvalidListener extends Listener {
             return null;
         }
 
+        let reaction;
+        if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
+            reaction = await message.react('📝');
+        }
+
+        let errored = false;
         const result = await this.client.languageHandler.evalCode(message, parse)
-            .catch(e => e.message) || '\n';
+            .catch(e => {
+                errored = true;
+                return e.message;
+            }) || '\n';
+
+        if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
+            if (reaction) {
+                reaction.users.remove();
+            }
+
+            if (errored) {
+                message.react('✖');
+            } else {
+                message.react('✔');
+            }
+        }
 
         const invalid = parse.invalid.length ? `Invalid options: ${parse.invalid.join(', ')}\n` : '';
         const output = `${invalid}\`\`\`${parse.language.highlight}\n${result}\`\`\``;
@@ -37,8 +58,8 @@ class MessageInvalidListener extends Listener {
     }
 
     parseMessage(message) {
-        const regex1 = /^\s*>\s*(?:(.+?))?\s*```(.+?)\n([^]+)```\s*$/;
-        const regex2 = /^\s*>\s*(?:(.+?))?\s*`(.+?) \s*([^]+)`\s*$/;
+        const regex1 = /^\s*>\s*(.+?)?\s*```(.+?)\n([^]+)```\s*$/;
+        const regex2 = /^\s*>\s*(.+?)?\s*`(.+?) \s*([^]+)`\s*$/;
         const match = message.content.match(regex1) || message.content.match(regex2);
         if (!match) {
             return null;
