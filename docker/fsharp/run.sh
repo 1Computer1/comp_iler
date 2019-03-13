@@ -1,2 +1,2 @@
-echo "$1" > program.fsx
-fsharpi --optimize- --exec program.fsx
+echo "$1" > program.fs
+fsharpc --optimize- program.fs >/dev/null && mono program.exe
