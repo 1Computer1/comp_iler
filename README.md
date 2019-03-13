@@ -15,7 +15,7 @@ code
 With options:
 
 ````
->[options]```lang
+>options```lang
 code
 ```
 ````
@@ -29,7 +29,7 @@ code
 With options:
 
 ````
->[options]`lang code`
+>options`lang code`
 ````
 
 ### Examples
@@ -42,7 +42,7 @@ main = print 1
 ````
 
 ````
->[harmony]```js
+>harmony```js
 class Foo {
     bar = 1;
 }
@@ -53,6 +53,10 @@ console.log(new Foo().bar);
 
 ```
 >`py print('hello world')`
+```
+
+```
+>e`hs (+) <$> Just 1 <*> Just 2`
 ```
 
 ## Supported Languages

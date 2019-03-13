@@ -37,8 +37,8 @@ class MessageInvalidListener extends Listener {
     }
 
     parseMessage(message) {
-        const regex1 = /^\s*>\s*(?:\[(.+?)\])?\s*```(.+?)\n([^]+)```\s*$/;
-        const regex2 = /^\s*>\s*(?:\[(.+?)\])?\s*`(.+?) \s*([^]+)`\s*$/;
+        const regex1 = /^\s*>\s*(?:(.+?))?\s*```(.+?)\n([^]+)```\s*$/;
+        const regex2 = /^\s*>\s*(?:(.+?))?\s*`(.+?) \s*([^]+)`\s*$/;
         const match = message.content.match(regex1) || message.content.match(regex2);
         if (!match) {
             return null;
