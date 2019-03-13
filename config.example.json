@@ -1,4 +1,10 @@
 {
-    "owner": "123",
-    "token": "123"
+    "owner": "Discord ID of the bot owner(s)",
+    "token": "Bot token",
+    "languages": [
+        "Language whitelist, e.g.",
+        "haskell",
+        "python",
+        "Leave empty to enable all languages"
+    ]
 }

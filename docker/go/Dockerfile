@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM golang:alpine
 LABEL author="1Computer1"
 
 COPY run.sh /var/run/

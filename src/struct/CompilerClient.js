@@ -31,7 +31,7 @@ class CompilerClient extends AkairoClient {
         this.config = config;
     }
 
-    start() {
+    async start() {
         this.commandHandler.useListenerHandler(this.listenerHandler);
         this.listenerHandler.setEmitters({
             commandHandler: this.commandHandler,
@@ -42,7 +42,7 @@ class CompilerClient extends AkairoClient {
         this.commandHandler.loadAll();
         this.listenerHandler.loadAll();
         this.languageHandler.loadAll();
-        this.languageHandler.buildDocker();
+        await this.languageHandler.buildDocker();
         return this.login(this.config.token);
     }
 }
