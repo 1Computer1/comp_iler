@@ -76,9 +76,13 @@ class MessageInvalidListener extends Listener {
                 continue;
             }
 
-            const ok = Object.prototype.hasOwnProperty.call(language.options, key) && language.options[key](value);
-            if (ok) {
-                valid.set(key, value);
+            if (Object.prototype.hasOwnProperty.call(language.options, key)) {
+                const parse = language.options[key](value);
+                if (parse != null) {
+                    valid.set(key, parse);
+                } else {
+                    invalid.push(key);
+                }
             } else {
                 invalid.push(key);
             }

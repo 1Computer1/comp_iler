@@ -6,7 +6,7 @@ class JavaScript extends Language {
             highlight: 'js',
             aliases: ['javaScript', 'js'],
             options: {
-                harmony: () => true
+                harmony: () => ''
             }
         });
     }
