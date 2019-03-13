@@ -70,7 +70,7 @@ class LanguageHandler extends AkairoHandler {
                     if (process.platform === 'win32') {
                         childProcess.execSync(`docker kill --signal=9 ${name} >nul 2>nul`);
                     } else {
-                        childProcess.execSync(`docker kill --signal=9 ${name} >/dev/null 2>/dev/nul`);
+                        childProcess.execSync(`docker kill --signal=9 ${name} >/dev/null 2>/dev/null`);
                     }
 
                     reject(new Error('Evaluation timed out'));

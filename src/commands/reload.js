@@ -6,6 +6,7 @@ class ReloadCommand extends Command {
             aliases: ['reload', 'r'],
             ownerOnly: true,
             quoted: false,
+            clientPermissions: ['SEND_MESSAGES'],
             args: [
                 {
                     id: 'type',

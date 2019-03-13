@@ -11,6 +11,10 @@ class MessageInvalidListener extends Listener {
     }
 
     async exec(message) {
+        if (message.guild && !message.channel.permissionsFor(this.client.user).has('SEND_MESSAGES')) {
+            return null;
+        }
+
         const parse = this.parseMessage(message);
         if (!parse) {
             return null;
@@ -68,6 +72,10 @@ class MessageInvalidListener extends Listener {
         const valid = new Map();
         const invalid = [];
         for (const [key, value] of kvs) {
+            if (!key) {
+                continue;
+            }
+
             const ok = Object.prototype.hasOwnProperty.call(language.options, key) && language.options[key](value);
             if (ok) {
                 valid.set(key, value);

@@ -3,7 +3,8 @@ const { Command } = require('discord-akairo');
 class AboutCommand extends Command {
     constructor() {
         super('about', {
-            aliases: ['about']
+            aliases: ['about'],
+            clientPermissions: ['SEND_MESSAGES']
         });
     }
 
