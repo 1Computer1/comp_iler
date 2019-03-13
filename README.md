@@ -71,12 +71,13 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
 
 For JavaScript:
 - `harmony` enables harmony features (`--harmony` on node)
+- `e` prints the result of evaluating the code
 
 For Python:
 - `2` runs Python 2 instead of Python 3
 
 For Haskell:
-- None
+- `e` evaluates a single expression instead of a module
 
 For Pascal:
 - None
