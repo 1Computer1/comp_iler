@@ -33,6 +33,7 @@ class HelpCommand extends Command {
             '- Haskell',
             '- Pascal',
             '- Go',
+            '- F#',
             '',
             'Read the readme for more information: <https://github.com/1Computer1/comp_iler>'
         ]);
