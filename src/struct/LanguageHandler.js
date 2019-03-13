@@ -2,6 +2,8 @@ const { AkairoHandler } = require('discord-akairo');
 const { Collection } = require('discord.js');
 const Language = require('./Language');
 const childProcess = require('child_process');
+const util = require('util');
+const path = require('path');
 
 class LanguageHandler extends AkairoHandler {
     constructor(client, {
@@ -48,9 +50,10 @@ class LanguageHandler extends AkairoHandler {
     }
 
     buildDocker() {
-        for (const [, { id }] of this.modules) {
-            childProcess.execSync(`docker build -t "1computer1/comp_iler:${id}" ./docker/${id}`);
-        }
+        return Promise.all(this.modules.map(({ id }) => {
+            const folder = path.join(__dirname, '../../docker', id);
+            return util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${id}" ${folder}`);
+        }));
     }
 
     evalCode(message, { language, code, options }) {
