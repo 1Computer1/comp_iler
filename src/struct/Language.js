@@ -5,12 +5,14 @@ class Language extends AkairoModule {
         category,
         highlight,
         aliases,
+        loads = [id],
         options = {}
     } = {}) {
         super(id, { category });
 
         this.highlight = highlight;
         this.aliases = aliases;
+        this.loads = loads;
         this.options = options;
     }
 

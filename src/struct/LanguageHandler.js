@@ -51,9 +51,11 @@ class LanguageHandler extends AkairoHandler {
     }
 
     buildDocker() {
-        return Promise.all(this.modules.map(({ id }) => {
-            const folder = path.join(__dirname, '../../docker', id);
-            return util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${id}" ${folder}`);
+        return Promise.all(this.modules.map(({ loads }) => {
+            return Promise.all(loads.map(name => {
+                const folder = path.join(__dirname, '../../docker', name);
+                return util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${name}" ${folder}`);
+            }));
         }));
     }
 

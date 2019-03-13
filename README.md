@@ -60,7 +60,7 @@ console.log(new Foo().bar);
 One of the following languages is set in `lang`.
 
 - `js` JavaScript (Node 10.14.2)
-- `py` Python (CPython 3.6.8)
+- `py` Python (CPython 3.6.8, CPython 2.7.15)
 - `hs` Haskell (GHC 8.4.3)
 - `pas` Pascal (FPC 3.0.4)
 - `go` Go (Go 1.12)
@@ -73,7 +73,7 @@ For JavaScript:
 - `harmony` enables harmony features (`--harmony` on node)
 
 For Python:
-- None
+- `2` runs Python 2 instead of Python 3
 
 For Haskell:
 - None
@@ -96,7 +96,7 @@ For JavaScript:
 - cheerio
 
 For Python:
-- numpy
+- numpy (Python 3 only)
 
 For Haskell:
 - GHC libraries
