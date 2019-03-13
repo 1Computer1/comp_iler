@@ -1,2 +1,2 @@
-echo "$1" > program.fs
-fsc program.fs && program
+echo "$1" > program.fsx
+fsharpi --optimize- --exec program.fsx
