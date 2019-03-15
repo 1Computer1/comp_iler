@@ -27,15 +27,8 @@ class HelpCommand extends Command {
             'new Foo().bar;',
             '`\u200B``',
             '```',
-            '**Supported languages:**',
-            '- JavaScript',
-            '- Python',
-            '- Haskell',
-            '- Pascal',
-            '- Go',
-            '- F#',
             '',
-            'Read the readme for more information: <https://github.com/1Computer1/comp_iler>'
+            'Read the readme for supported languages and options: <https://github.com/1Computer1/comp_iler>'
         ]);
     }
 }
