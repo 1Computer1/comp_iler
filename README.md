@@ -10,11 +10,7 @@ Sandboxed code execution discord bot.
 >```lang
 code
 ```
-````
 
-With options:
-
-````
 >options```lang
 code
 ```
@@ -24,24 +20,22 @@ code
 
 ```
 >`lang code`
-```
 
-With options:
-
-````
 >options`lang code`
-````
+```
 
 ### Examples
 
 ````
->```hs
-main :: IO ()
-main = print 1
-```
-````
+>```cpp
+#include <iostream>
 
-````
+int main()
+{
+    std::cout << "Hello World!" << std::endl;
+}
+```
+
 >harmony```js
 class Foo {
     bar = 1;
@@ -49,58 +43,28 @@ class Foo {
 
 console.log(new Foo().bar);
 ```
+
+>`py print('hello world')`
+
+>e`hs (+) <$> Just 1 <*> Just 2`
 ````
 
-```
->`py print('hello world')`
-```
+## Supported Languages and Options
 
-```
->e`hs (+) <$> Just 1 <*> Just 2`
-```
+One of the following language codes is set in `lang`.  
+Options are optionally set in `options`, which is a semicolon-delimited list of `flag` or `flag=value`. 
 
-## Supported Languages
-
-One of the following languages is set in `lang`.
-
-- `js` JavaScript (Node 11.11.0)
-- `py` Python (CPython 3.7.2, CPython 2.7.16)
-- `hs` Haskell (GHC 8.6.3)
-- `pas` Pascal (FPC 3.0.4)
-- `go` Go (Go 1.12)
-- `fs` F# (FSharp 4.5)
 - `c` C (GCC 8.2.0)
 - `cpp` C++ (G++ 8.2.0)
 - `cs` C# (Mono 5.18.0)
-
-## Options
-
-Options are optionally set in `options`, which is a semicolon-delimited list of `flag` or `flag=value`. 
-
-For JavaScript:
-- `harmony` enables harmony features (`--harmony` on node)
-- `e` prints the result of evaluating the code
-
-For Python:
-- `2` runs Python 2 instead of Python 3
-
-For Haskell:
-- `e` evaluates a single expression instead of a module
-
-For Pascal:
-- None
-
-For Go:
-- None
-
-For F#:
-- None
-
-For C:
-- None
-
-For C++:
-- None
-
-For C#:
-- `e` evaluates a single expression instead of a module
+    - `e` evaluates a single expression instead of a module
+- `fs` F# (FSharp 4.5)
+- `go` Go (Go 1.12)
+- `hs` Haskell (GHC 8.6.3)
+    - `e` evaluates a single expression instead of a module
+- `js` JavaScript (Node 11.11.0)
+    - `harmony` enables harmony features (`--harmony` on node)
+    - `e` prints the result of evaluating the code
+- `pas` Pascal (FPC 3.0.4)
+- `py` Python (CPython 3.7.2, CPython 2.7.16)
+    - `2` runs Python 2 instead of Python 3
