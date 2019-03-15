@@ -54,6 +54,7 @@ console.log(new Foo().bar);
 One of the following language codes is set in `lang`.  
 Options are optionally set in `options`, which is a semicolon-delimited list of `flag` or `flag=value`. 
 
+- `bash` Bash (Bash 5.0.2)
 - `c` C (GCC 8.2.0)
 - `clj` Clojure (Clojure 1.10)
 - `cpp` C++ (G++ 8.2.0)
@@ -69,6 +70,8 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
     - `harmony` enables harmony features (`--harmony` on node)
     - `e` prints the result of evaluating the code
 - `pas` Pascal (FPC 3.0.4)
+- `php` PHP (PHP 7.3.3)
+- `pl` Perl (Perl 5.28.1)
 - `py` Python (CPython 3.7.2, CPython 2.7.16)
     - `2` runs Python 2 instead of Python 3
 - `rb` Ruby (Ruby 2.6.2)
