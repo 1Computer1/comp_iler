@@ -5,4 +5,3 @@ RUN apk update
 RUN apk add gcc libc-dev
 
 COPY run.sh /var/run/
-WORKDIR /var/ws
