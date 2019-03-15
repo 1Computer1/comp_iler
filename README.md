@@ -69,6 +69,9 @@ One of the following languages is set in `lang`.
 - `pas` Pascal (FPC 3.0.4)
 - `go` Go (Go 1.12)
 - `fs` F# (FSharp 4.5)
+- `c` C (GCC 8.2.0)
+- `cpp` C++ (G++ 8.2.0)
+- `cs` C# (Mono 5.18.0)
 
 ## Options
 
@@ -92,3 +95,12 @@ For Go:
 
 For F#:
 - None
+
+For C:
+- None
+
+For C++:
+- None
+
+For C#:
+- `e` evaluates a single expression instead of a module
