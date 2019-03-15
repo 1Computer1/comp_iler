@@ -22,6 +22,7 @@ class MessageInvalidListener extends Listener {
 
         let reaction;
         if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
+            await Promise.all(message.reactions.filter(r => r.me).map(r => r.users.remove()));
             reaction = await message.react('📝');
         }
 
