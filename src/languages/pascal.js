@@ -3,8 +3,7 @@ const Language = require('../struct/Language');
 class Pascal extends Language {
     constructor() {
         super('pascal', {
-            highlight: 'pas',
-            aliases: ['pascal', 'pas']
+            aliases: ['pascal', 'pas', 'freepascal']
         });
     }
 }

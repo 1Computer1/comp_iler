@@ -45,7 +45,7 @@ class MessageInvalidListener extends Listener {
         }
 
         const invalid = parse.invalid.length ? `Invalid options: ${parse.invalid.join(', ')}\n` : '';
-        const output = `${invalid}\`\`\`${parse.language.highlight}\n${result}\`\`\``;
+        const output = `${invalid}\`\`\`${parse.language.aliases[0]}\n${result}\`\`\``;
         if (output.length >= 2000) {
             const key = await fetch('https://hastebin.com/documents', { method: 'POST', body: result })
                 .then(res => res.json())
