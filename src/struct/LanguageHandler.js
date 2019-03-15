@@ -64,7 +64,7 @@ class LanguageHandler extends AkairoHandler {
             const name = `comp_iler-${message.id}-${Date.now()}`;
             const { id, env } = language.runWith(options);
             const proc = childProcess.spawn('docker', [
-                'run', '--rm', `--name=${name}`,
+                'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/',
                 '--net=none', `--cpus=${this.client.config.cpus}`, `-m=${this.client.config.memory}`,
                 ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
                 `1computer1/comp_iler:${id}`,
