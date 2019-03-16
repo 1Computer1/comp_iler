@@ -71,7 +71,6 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
     - `e` prints the result of evaluating the code
 - `julia` Julia (Julia 1.1.0)
     - `e` prints the result of evaluating the code
-- `kotlin` Kotlin (Kotlin 1.3)
 - `lisp` Racket (Racket 7.2)
 - `lua` Lua (Lua 5.3)
 - `ocaml` OCaml (OCaml 4.0.6)
