@@ -71,6 +71,7 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
     - `e` prints the result of evaluating the code
 - `julia` Julia (Julia 1.1.0)
     - `e` prints the result of evaluating the code
+- `kotlin` Kotlin (Kotlin 1.3)
 - `lua` Lua (Lua 5.3)
 - `pas` Pascal (FPC 3.0.4)
 - `php` PHP (PHP 7.3.3)
