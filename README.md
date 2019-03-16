@@ -69,6 +69,8 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
 - `js` JavaScript (Node 11.11.0)
     - `harmony` enables harmony features (`--harmony` on node)
     - `e` prints the result of evaluating the code
+- `julia` Julia (Julia 1.1.0)
+    - `e` prints the result of evaluating the code
 - `pas` Pascal (FPC 3.0.4)
 - `php` PHP (PHP 7.3.3)
 - `pl` Perl (Perl 5.28.1)
