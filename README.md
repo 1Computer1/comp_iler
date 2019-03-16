@@ -63,7 +63,7 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
 - `elixir` Elixir (Elixir 1.8.1)
 - `fs` F# (FSharp 4.5)
 - `go` Go (Go 1.12)
-- `hs` Haskell (GHC 8.6.3)
+- `hs` Haskell (GHC 8.4.3)
     - `e` evaluates a single expression instead of a module
 - `java` Java (OpenJDK 13)
 - `js` JavaScript (Node 11.11.0)
