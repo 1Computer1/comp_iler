@@ -73,6 +73,7 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
     - `e` prints the result of evaluating the code
 - `kotlin` Kotlin (Kotlin 1.3)
 - `lua` Lua (Lua 5.3)
+- `ocaml` OCaml (OCaml 4.0.6)
 - `pas` Pascal (FPC 3.0.4)
 - `php` PHP (PHP 7.3.3)
 - `pl` Perl (Perl 5.28.1)
