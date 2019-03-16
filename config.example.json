@@ -5,7 +5,7 @@
         "Language whitelist, e.g.",
         "haskell",
         "python",
-        "Leave empty to enable all languages"
+        "Change to null to enable all languages"
     ],
     "memory": "128m",
     "cpus": "0.5",

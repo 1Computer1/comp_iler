@@ -12,7 +12,7 @@ class LanguageHandler extends AkairoHandler {
         extensions = ['.js', '.ts'],
         automateCategories,
         loadFilter = filepath =>
-            !this.client.config.languages.length || this.client.config.languages.includes(path.parse(filepath).name)
+            !this.client.config.languages || this.client.config.languages.includes(path.parse(filepath).name)
     }) {
         super(client, {
             directory,
