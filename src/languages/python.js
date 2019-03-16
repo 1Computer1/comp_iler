@@ -13,10 +13,10 @@ class Python extends Language {
 
     runWith(options) {
         if (options.has('2')) {
-            return { id: 'python2', env: {} };
+            return { id: 'python2' };
         }
 
-        return { id: 'python3', env: {} };
+        return { id: 'python3' };
     }
 }
 

@@ -12,10 +12,10 @@ class Julia extends Language {
 
     runWith(options) {
         if (options.has('e')) {
-            return { id: this.id, env: { EVAL_EXPR: 'true' } };
+            return { env: { EVAL_EXPR: 'true' } };
         }
 
-        return super.runWith(options);
+        return {};
     }
 }
 

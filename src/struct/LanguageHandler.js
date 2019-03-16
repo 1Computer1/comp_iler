@@ -62,7 +62,7 @@ class LanguageHandler extends AkairoHandler {
     evalCode(message, { language, code, options }) {
         return new Promise((resolve, reject) => {
             const name = `comp_iler-${message.id}-${Date.now()}`;
-            const { id, env } = language.runWith(options);
+            const { id = language.id, env = {} } = language.runWith(options);
             const proc = childProcess.spawn('docker', [
                 'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/',
                 '--net=none', `--cpus=${this.client.config.cpus}`, `-m=${this.client.config.memory}`,

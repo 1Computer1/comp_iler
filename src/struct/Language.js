@@ -15,7 +15,7 @@ class Language extends AkairoModule {
     }
 
     runWith() {
-        return { id: this.id, env: {} };
+        return {};
     }
 }
 
