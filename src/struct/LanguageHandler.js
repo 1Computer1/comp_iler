@@ -23,6 +23,7 @@ class LanguageHandler extends AkairoHandler {
         });
 
         this.aliases = new Collection();
+        this.containers = new Collection();
     }
 
     register(language, filepath) {
@@ -59,30 +60,50 @@ class LanguageHandler extends AkairoHandler {
         }));
     }
 
-    evalCode(message, { language, code, options }) {
+    async setupContainer(id) {
+        if (this.containers.has(id)) {
+            return this.containers.get(id);
+        }
+
+        const name = `comp_iler-${id}-${Date.now()}`;
+        const proc = childProcess.spawn('docker', [
+            'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/', '-t', '-d',
+            '--net=none', `--cpus=${this.client.config.cpus}`, `-m=${this.client.config.memory}`,
+            `1computer1/comp_iler:${id}`
+        ]);
+
+        try {
+            await this.handleSpawn(proc);
+            this.containers.set(id, { name });
+            return this.containers.get(id);
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async evalCode({ language, code, options }) {
+        const { id = language.id, env = {} } = language.runWith(options);
+        const { name } = await this.setupContainer(id);
+        const proc = childProcess.spawn('docker', [
+            'exec',
+            ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
+            name, '/bin/sh', '/var/run/run.sh', code
+        ]);
+
+        try {
+            const result = await this.handleSpawn(proc);
+            return result;
+        } catch (err) {
+            this.images.delete(id);
+            await this.kill(name);
+            throw err;
+        }
+    }
+
+    handleSpawn(proc) {
         return new Promise((resolve, reject) => {
-            const name = `comp_iler-${message.id}-${Date.now()}`;
-            const { id = language.id, env = {} } = language.runWith(options);
-            const proc = childProcess.spawn('docker', [
-                'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/',
-                '--net=none', `--cpus=${this.client.config.cpus}`, `-m=${this.client.config.memory}`,
-                ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
-                `1computer1/comp_iler:${id}`,
-                '/bin/sh', '/var/run/run.sh', code
-            ]);
-
             setTimeout(() => {
-                try {
-                    if (process.platform === 'win32') {
-                        childProcess.execSync(`docker kill --signal=9 ${name} >nul 2>nul`);
-                    } else {
-                        childProcess.execSync(`docker kill --signal=9 ${name} >/dev/null 2>/dev/null`);
-                    }
-
-                    reject(new Error('Timed out'));
-                } catch (e) {
-                    reject(e);
-                }
+                reject(new Error('Timed out'));
             }, this.client.config.timeout);
 
             let data = '';
@@ -107,6 +128,21 @@ class LanguageHandler extends AkairoHandler {
                 }
             });
         });
+    }
+
+    kill(name) {
+        let cmd;
+        if (process.platform === 'win32') {
+            cmd = `docker kill --signal=9 ${name} >nul 2>nul`;
+        } else {
+            cmd = `docker kill --signal=9 ${name} >/dev/null 2>/dev/null`;
+        }
+
+        return util.promisify(childProcess.exec)(cmd);
+    }
+
+    cleanup() {
+        return Promise.all(this.images.map(({ name }) => this.kill(name)));
     }
 }
 

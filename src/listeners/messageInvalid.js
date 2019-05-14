@@ -27,7 +27,7 @@ class MessageInvalidListener extends Listener {
         }
 
         let errored = false;
-        const result = await this.client.languageHandler.evalCode(message, parse)
+        const result = await this.client.languageHandler.evalCode(parse)
             .catch(e => {
                 errored = true;
                 return e.message;
