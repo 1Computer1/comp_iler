@@ -142,7 +142,7 @@ class LanguageHandler extends AkairoHandler {
     }
 
     cleanup() {
-        return Promise.all(this.images.map(({ name }) => this.kill(name)));
+        return Promise.all(this.containers.map(({ name }) => this.kill(name)));
     }
 }
 
