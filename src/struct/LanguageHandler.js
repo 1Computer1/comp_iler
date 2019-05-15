@@ -95,7 +95,7 @@ class LanguageHandler extends AkairoHandler {
             const result = await this.handleSpawn(proc);
             return result;
         } catch (err) {
-            this.images.delete(id);
+            this.containers.delete(id);
             await this.kill(name);
             throw err;
         }
