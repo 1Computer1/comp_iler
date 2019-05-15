@@ -54,34 +54,34 @@ console.log(new Foo().bar);
 One of the following language codes is set in `lang`.  
 Options are optionally set in `options`, which is a semicolon-delimited list of `flag` or `flag=value`. 
 
-- `bash` Bash (Bash 5.0.2)
-- `c` C (GCC 8.2.0)
-- `clj` Clojure (Clojure 1.10)
-- `cpp` C++ (G++ 8.2.0)
-- `cs` C# (Mono 5.18.0)
+- `bash` Bash
+- `c` C (GCC)
+- `clj` Clojure
+- `cpp` C++ (G++)
+- `cs` C# (Mono)
     - `e` evaluates a single expression instead of a module
-- `elixir` Elixir (Elixir 1.8.1)
-- `fs` F# (FSharp 4.5)
-- `go` Go (Go 1.12)
-- `hs` Haskell (GHC 8.4.3)
+- `elixir` Elixir
+- `fs` F#
+- `go` Go
+- `hs` Haskell (GHC)
     - `e` evaluates a single expression instead of a module
-- `java` Java (OpenJDK 13)
-- `js` JavaScript (Node 11.11.0)
+- `java` Java (OpenJDK)
+- `js` JavaScript (Node)
     - `harmony` enables harmony features (`--harmony` on node)
     - `e` prints the result of evaluating the code
-- `julia` Julia (Julia 1.1.0)
+- `julia` Julia
     - `e` prints the result of evaluating the code
-- `lisp` Racket (Racket 7.2)
-- `lua` Lua (Lua 5.3)
-- `ocaml` OCaml (OCaml 4.0.6)
-- `pas` Pascal (FPC 3.0.4)
-- `php` PHP (PHP 7.3.3)
-- `pl` Perl (Perl 5.28.1)
-- `prolog` Prolog (SWI-Prolog 8.1.2)
-- `py` Python (CPython 3.7.2, CPython 2.7.16)
+- `lisp` Racket
+- `lua` Lua
+- `ocaml` OCaml
+- `pas` Pascal (FPC)
+- `php` PHP
+- `pl` Perl5
+- `prolog` Prolog (SWI-Prolog)
+- `py` Python (CPython)
     - `2` runs Python 2 instead of Python 3
-- `rb` Ruby (Ruby 2.6.2)
-- `rs` Rust (Rust 1.33.0)
+- `rb` Ruby
+- `rs` Rust
 
 ## How it Works
 
