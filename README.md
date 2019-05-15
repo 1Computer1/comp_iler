@@ -82,3 +82,18 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
     - `2` runs Python 2 instead of Python 3
 - `rb` Ruby (Ruby 2.6.2)
 - `rs` Rust (Rust 1.33.0)
+
+## How it Works
+
+Read the source code, specifically `src/struct/LanguageHandler.js`.  
+In summary, for every language there is a docker image which spins up a docker container.  
+The container is used for all evaluations of code, restarting if something goes wrong.  
+The container is locked down, so there is no networking, limited memory and CPU usage, and a time limit.  
+
+## Setup
+
+0. Install Docker
+0. Install Node
+0. Run `npm i`
+0. Fill out `config.json`
+0. Run `node .`
