@@ -1,3 +1,5 @@
+mkdir "$COUNT" && cd "$COUNT"
+
 echo "$1" > program.pas
 
 # fpc does not use stderr, ld however does, capture both
@@ -9,3 +11,5 @@ else
   echo "$res"
   exit 1
 fi
+
+cd .. && rm -rf "$COUNT"

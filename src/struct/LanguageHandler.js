@@ -74,7 +74,7 @@ class LanguageHandler extends AkairoHandler {
 
         try {
             await this.handleSpawn(proc);
-            this.containers.set(id, { name });
+            this.containers.set(id, { name, count: 0 });
             return this.containers.get(id);
         } catch (err) {
             throw err;
@@ -83,9 +83,10 @@ class LanguageHandler extends AkairoHandler {
 
     async evalCode({ language, code, options }) {
         const { id = language.id, env = {} } = language.runWith(options);
-        const { name } = await this.setupContainer(id);
+        const { name, count } = await this.setupContainer(id);
         const proc = childProcess.spawn('docker', [
             'exec',
+            `-eCOUNT=${count}`,
             ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
             name, '/bin/sh', '/var/run/run.sh', code
         ]);
