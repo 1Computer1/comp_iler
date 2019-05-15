@@ -52,10 +52,13 @@ class LanguageHandler extends AkairoHandler {
     }
 
     buildDocker() {
-        return Promise.all(this.modules.map(({ loads }) => {
-            return Promise.all(loads.map(name => {
+        return Promise.all(this.modules.map(({ id, loads }) => {
+            return Promise.all(loads.map(async name => {
                 const folder = path.join(__dirname, '../../docker', name);
-                return util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${name}" ${folder}`);
+                await util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${name}" ${folder}`);
+                if (this.client.config.prepare) {
+                    await this.setupContainer(id);
+                }
             }));
         }));
     }

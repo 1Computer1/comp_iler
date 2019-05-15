@@ -11,5 +11,6 @@
     ],
     "memory": "128m",
     "cpus": "0.5",
-    "timeout": 10000
+    "timeout": 10000,
+    "prepare": false
 }
