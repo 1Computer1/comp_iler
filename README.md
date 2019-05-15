@@ -10,7 +10,9 @@ Sandboxed code execution discord bot.
 >```lang
 code
 ```
+````
 
+````
 >options```lang
 code
 ```
@@ -20,7 +22,9 @@ code
 
 ```
 >`lang code`
+```
 
+```
 >options`lang code`
 ```
 
@@ -35,7 +39,9 @@ int main()
     std::cout << "Hello World!" << std::endl;
 }
 ```
+````
 
+````
 >harmony```js
 class Foo {
     bar = 1;
@@ -43,11 +49,15 @@ class Foo {
 
 console.log(new Foo().bar);
 ```
-
->`py print('hello world')`
-
->e`hs (+) <$> Just 1 <*> Just 2`
 ````
+
+```
+>`py print('hello world')`
+```
+
+```
+>e`hs (+) <$> Just 1 <*> Just 2`
+```
 
 ## Supported Languages and Options
 
@@ -61,7 +71,7 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
 - `cs` C# (Mono)
     - `e` evaluates a single expression instead of a module
 - `elixir` Elixir
-- `fs` F#
+- `fs` F# (Mono)
 - `go` Go
 - `hs` Haskell (GHC)
     - `e` evaluates a single expression instead of a module
