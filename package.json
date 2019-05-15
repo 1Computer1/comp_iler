@@ -6,11 +6,11 @@
   "author": "1Computer1",
   "license": "MIT",
   "dependencies": {
-    "discord-akairo": "^8.0.0-beta.1",
+    "discord-akairo": "^8.0.0-beta.8",
     "discord.js": "github:discordjs/discord.js",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.5.0"
   },
   "devDependencies": {
-    "eslint": "^5.15.1"
+    "eslint": "^5.16.0"
   }
 }
