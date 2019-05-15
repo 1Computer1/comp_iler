@@ -92,8 +92,20 @@ The container is locked down, so there is no networking, limited memory and CPU 
 
 ## Setup
 
-0. Install Docker
-0. Install Node
+0. Install Docker 18+
+0. Install Node 10+
 0. Run `npm i`
 0. Fill out `config.json`
+    - `owner` - The owner(s) of the bot.  
+        Use an array for multiple owners.
+    - `token` - The bot token.  
+    - `languages` Languages to use.  
+        The language names here are different from the user-facing ones.  
+        Check the folders in ./docker/ for the language names.  
+        Change to null to enable all languages.  
+    - `memory` Max memory usage of a container.  
+    - `cpu` Max CPU usage of a container.  
+    - `timeout` Time limit for code in milliseconds.  
+    - `prepare` Whether to run containers on setup.  
+        Setting to true will speed up the first eval, but that language might not be used.
 0. Run `node .`
