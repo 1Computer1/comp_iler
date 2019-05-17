@@ -13,7 +13,7 @@ class CompilerClient extends AkairoClient {
 
         this.commandHandler = new CommandHandler(this, {
             directory: path.join(__dirname, '../commands'),
-            prefix: '>',
+            prefix: config.prefix,
             allowMention: true,
             commandUtil: true,
             commandUtilLifetime: 3e5,

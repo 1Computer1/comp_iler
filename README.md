@@ -110,6 +110,8 @@ The container is locked down, so there is no networking, limited memory and CPU 
     - `owner` - The owner(s) of the bot.  
         Use an array for multiple owners.
     - `token` - The bot token.  
+    - `prefix` - The prefix for commands.  
+    - `codePrefix` - The prefix for code evaluation.  
     - `languages` Languages to use.  
         The language names here are different from the user-facing ones.  
         Check the folders in `docker/` for the language names.  
