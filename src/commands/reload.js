@@ -6,31 +6,33 @@ class ReloadCommand extends Command {
             aliases: ['reload', 'r'],
             ownerOnly: true,
             quoted: false,
-            clientPermissions: ['SEND_MESSAGES'],
-            args: [
-                {
-                    id: 'type',
-                    match: 'option',
-                    flag: ['type:'],
-                    type: [['command', 'c'], ['listener', 'l']],
-                    default: 'command'
-                },
-                {
-                    id: 'module',
-                    type: (phrase, message, { type }) => {
-                        if (!phrase) return null;
-                        const resolver = this.handler.resolver.type({
-                            command: 'commandAlias',
-                            listener: 'listener'
-                        }[type]);
-                        return resolver(phrase);
-                    }
-                }
-            ]
+            clientPermissions: ['SEND_MESSAGES']
         });
     }
 
-    exec(message, { type, module: mod }) {
+    *args() {
+        const type = yield {
+            match: 'option',
+            flag: ['type:'],
+            type: [['command', 'c'], ['listener', 'l']],
+            default: 'command'
+        };
+
+        const mod = yield {
+            type: (message, phrase) => {
+                if (!phrase) return null;
+                const resolver = this.handler.resolver.type({
+                    command: 'commandAlias',
+                    listener: 'listener'
+                }[type]);
+                return resolver(message, phrase);
+            }
+        };
+
+        return { type, mod };
+    }
+
+    exec(message, { type, mod }) {
         if (!mod) {
             return message.util.send(`Invalid ${type} ${type === 'command' ? 'alias' : 'ID'} specified to reload.`);
         }
