@@ -8,7 +8,7 @@
   "dependencies": {
     "discord-akairo": "^8.0.0-beta.8",
     "discord.js": "github:discordjs/discord.js",
-    "node-fetch": "^2.5.0"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0"
