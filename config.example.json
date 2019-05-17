@@ -8,8 +8,8 @@
         "python",
         "javascript"
     ],
-    "memory": "128m",
-    "cpus": "0.5",
+    "memory": "256m",
+    "cpus": "0.25",
     "timeout": 10000,
     "prepare": false
 }
