@@ -85,9 +85,14 @@ class LanguageHandler extends AkairoHandler {
         }
     }
 
+    incrementCount(id) {
+        this.containers.get(id).count += 1;
+    }
+
     async evalCode({ language, code, options }) {
         const { id = language.id, env = {} } = language.runWith(options);
         const { name, count } = await this.setupContainer(id);
+        this.incrementCount(id);
         const proc = childProcess.spawn('docker', [
             'exec',
             `-eCOUNT=${count}`,
