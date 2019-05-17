@@ -3,6 +3,7 @@ const Language = require('../struct/Language');
 class JavaScript extends Language {
     constructor() {
         super('javascript', {
+            name: 'JavaScript',
             aliases: ['javascript', 'js'],
             options: {
                 harmony: () => '',

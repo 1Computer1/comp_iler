@@ -3,6 +3,7 @@ const Language = require('../struct/Language');
 class Python extends Language {
     constructor() {
         super('python', {
+            name: 'Python',
             aliases: ['python', 'py'],
             loads: ['python3', 'python2'],
             options: {

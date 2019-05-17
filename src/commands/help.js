@@ -11,24 +11,13 @@ class HelpCommand extends Command {
     exec(message) {
         return message.util.send([
             '**Usage:**',
-            'Put a `>` before a code block with a language or an inline code block that has a language to execute it.',
+            'Put a `>` before a code block or inline codeblock that starts with a language code to execute it.',
             'You can add options, separated by semicolons, after the `>`.',
             '',
-            '**Examples:**',
-            '```',
-            '>`\u200B``py',
-            'print(\'Hello world!\');',
-            '`\u200B``',
+            '**Enabled Languages (Name: Language Codes):**',
+            ...this.client.languageHandler.modules.map(lang => `${lang.name}: \`${lang.aliases.join('`, `')}\``),
             '',
-            '>`hs main = print (1 + 1)`',
-            '',
-            '>e; harmony`\u200B``js',
-            'class Foo { bar = 1; }',
-            'new Foo().bar;',
-            '`\u200B``',
-            '```',
-            '',
-            'Read the readme for supported languages and options: <https://github.com/1Computer1/comp_iler>'
+            'See the readme for usage examples, supported languages, and options: <https://github.com/1Computer1/comp_iler>'
         ]);
     }
 }
