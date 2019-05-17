@@ -114,7 +114,7 @@ The container is locked down, so there is no networking, limited memory and CPU 
     - `codePrefix` - The prefix for code evaluation.  
     - `languages` Languages to use.  
         The language names here are different from the user-facing ones.  
-        Check the folders in `docker/` for the language names.  
+        Check the filenames in `src/languages/` for the language names.  
         Change to `null` to enable all languages.  
     - `memory` Max memory usage of a container.  
     - `cpu` Max CPU usage of a container.  
