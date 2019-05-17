@@ -1,6 +1,7 @@
 const { AkairoHandler } = require('discord-akairo');
 const { Collection } = require('discord.js');
 const Language = require('./Language');
+const Queue = require('./Queue');
 const childProcess = require('child_process');
 const util = require('util');
 const path = require('path');
@@ -24,6 +25,7 @@ class LanguageHandler extends AkairoHandler {
 
         this.aliases = new Collection();
         this.containers = new Collection();
+        this.queues = new Collection();
     }
 
     register(language, filepath) {
@@ -56,6 +58,7 @@ class LanguageHandler extends AkairoHandler {
             return Promise.all(loads.map(async name => {
                 const folder = path.join(__dirname, '../../docker', name);
                 await util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${name}" ${folder}`);
+                this.queues.set(id, new Queue(10));
                 if (this.client.config.prepare) {
                     await this.setupContainer(id);
                 }
@@ -89,25 +92,29 @@ class LanguageHandler extends AkairoHandler {
         this.containers.get(id).count += 1;
     }
 
-    async evalCode({ language, code, options }) {
+    evalCode({ language, code, options }) {
         const { id = language.id, env = {} } = language.runWith(options);
-        const { name, count } = await this.setupContainer(id);
-        this.incrementCount(id);
-        const proc = childProcess.spawn('docker', [
-            'exec',
-            `-eCOUNT=${count}`,
-            ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
-            name, '/bin/sh', '/var/run/run.sh', code
-        ]);
+        const queue = this.queues.get(id);
+        return queue.enqueue(async () => {
+            const { name, count } = await this.setupContainer(id);
+            this.incrementCount(id);
 
-        try {
-            const result = await this.handleSpawn(proc);
-            return result;
-        } catch (err) {
-            this.containers.delete(id);
-            await this.kill(name);
-            throw err;
-        }
+            const proc = childProcess.spawn('docker', [
+                'exec',
+                `-eCOUNT=${count}`,
+                ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
+                name, '/bin/sh', '/var/run/run.sh', code
+            ]);
+
+            try {
+                const result = await this.handleSpawn(proc);
+                return result;
+            } catch (err) {
+                this.containers.delete(id);
+                await this.kill(name);
+                throw err;
+            }
+        });
     }
 
     handleSpawn(proc) {
