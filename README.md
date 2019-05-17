@@ -1,6 +1,7 @@
 # Comp_iler
 
-Sandboxed code execution discord bot.
+Sandboxed code execution discord bot.  
+[Invite the bot!](https://discordapp.com/oauth2/authorize?client_id=555066722969714728&scope=bot)  
 
 ## Usage
 
@@ -111,8 +112,8 @@ The container is locked down, so there is no networking, limited memory and CPU 
     - `token` - The bot token.  
     - `languages` Languages to use.  
         The language names here are different from the user-facing ones.  
-        Check the folders in ./docker/ for the language names.  
-        Change to null to enable all languages.  
+        Check the folders in `docker/` for the language names.  
+        Change to `null` to enable all languages.  
     - `memory` Max memory usage of a container.  
     - `cpu` Max CPU usage of a container.  
     - `timeout` Time limit for code in milliseconds.  
