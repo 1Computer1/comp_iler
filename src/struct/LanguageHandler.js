@@ -73,10 +73,10 @@ class LanguageHandler extends AkairoHandler {
 
         const name = `comp_iler-${dockerID}-${Date.now()}`;
         const proc = childProcess.spawn('docker', [
-            'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/', '-t', '-d',
+            'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/', '-dt',
             '--net=none', `--cpus=${this.client.config.cpus}`,
             `-m=${this.client.config.memory}`, `--memory-swap=${this.client.config.memory}`,
-            `1computer1/comp_iler:${dockerID}`
+            `1computer1/comp_iler:${dockerID}`, '/bin/sh'
         ]);
 
         try {
