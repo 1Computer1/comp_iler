@@ -53,17 +53,29 @@ class LanguageHandler extends AkairoHandler {
         return this.modules.get(this.aliases.get(alias.toLowerCase()));
     }
 
-    buildDocker() {
-        return Promise.all(this.modules.map(({ loads }) => {
-            return Promise.all(loads.map(async dockerID => {
-                const folder = path.join(__dirname, '../../docker', dockerID);
-                await util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${dockerID}" ${folder}`);
-                this.queues.set(dockerID, new Queue(10));
-                if (this.client.config.prepare) {
-                    await this.setupContainer(dockerID);
-                }
-            }));
-        }));
+    async buildDocker() {
+        if (this.client.config.parallel) {
+            await Promise.all(this.modules.map(({ loads }) => Promise.all(loads.map(dockerID => this.buildImage(dockerID)))));
+            return;
+        }
+
+        for (const { loads } of this.modules.values()) {
+            for (const dockerID of loads) {
+                // eslint-disable-next-line no-await-in-loop
+                await this.buildImage(dockerID);
+            }
+        }
+    }
+
+    async buildImage(dockerID) {
+        const folder = path.join(__dirname, '../../docker', dockerID);
+        await util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${dockerID}" ${folder}`);
+        // eslint-disable-next-line no-console
+        console.log(`Built image 1computer1/comp_iler:${dockerID}.`);
+        this.queues.set(dockerID, new Queue(10));
+        if (this.client.config.prepare) {
+            await this.setupContainer(dockerID);
+        }
     }
 
     async setupContainer(dockerID) {
@@ -82,6 +94,7 @@ class LanguageHandler extends AkairoHandler {
         try {
             await this.handleSpawn(proc);
             this.containers.set(dockerID, { name, count: 0 });
+            console.log(`Started container ${name} for 1computer1/comp_iler:${dockerID}.`);
             return this.containers.get(dockerID);
         } catch (err) {
             throw err;

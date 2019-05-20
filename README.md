@@ -121,5 +121,7 @@ The container is locked down, so there is no networking, limited memory and CPU 
     - `timeout` Time limit for code in milliseconds.  
     - `prepare` Whether to start containers on setup.  
         Setting to true will speed up the first eval, but that language might not be used.
+    - `parallel` Whether to build images and container in parallel.  
+        Faster, but will take more resources.
     - `concurrent` Number of code evaluations per language than can run at a time.  
 0. Run `node .`
