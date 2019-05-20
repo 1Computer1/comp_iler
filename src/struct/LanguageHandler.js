@@ -107,7 +107,7 @@ class LanguageHandler extends AkairoHandler {
             ]);
 
             try {
-                const result = await this.handleSpawn(proc);
+                const result = await this.handleSpawn(proc, true);
                 return result;
             } catch (err) {
                 this.containers.delete(dockerID);
@@ -117,11 +117,13 @@ class LanguageHandler extends AkairoHandler {
         });
     }
 
-    handleSpawn(proc) {
+    handleSpawn(proc, withTimeout = false) {
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                reject(new Error('Timed out'));
-            }, this.client.config.timeout);
+            if (withTimeout) {
+                setTimeout(() => {
+                    reject(new Error('Timed out'));
+                }, this.client.config.timeout);
+            }
 
             let data = '';
             proc.stdout.on('data', chunk => {
