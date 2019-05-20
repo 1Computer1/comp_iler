@@ -54,50 +54,50 @@ class LanguageHandler extends AkairoHandler {
     }
 
     buildDocker() {
-        return Promise.all(this.modules.map(({ id, loads }) => {
-            return Promise.all(loads.map(async name => {
-                const folder = path.join(__dirname, '../../docker', name);
-                await util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${name}" ${folder}`);
-                this.queues.set(id, new Queue(10));
+        return Promise.all(this.modules.map(({ loads }) => {
+            return Promise.all(loads.map(async dockerID => {
+                const folder = path.join(__dirname, '../../docker', dockerID);
+                await util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${dockerID}" ${folder}`);
+                this.queues.set(dockerID, new Queue(10));
                 if (this.client.config.prepare) {
-                    await this.setupContainer(id);
+                    await this.setupContainer(dockerID);
                 }
             }));
         }));
     }
 
-    async setupContainer(id) {
-        if (this.containers.has(id)) {
-            return this.containers.get(id);
+    async setupContainer(dockerID) {
+        if (this.containers.has(dockerID)) {
+            return this.containers.get(dockerID);
         }
 
-        const name = `comp_iler-${id}-${Date.now()}`;
+        const name = `comp_iler-${dockerID}-${Date.now()}`;
         const proc = childProcess.spawn('docker', [
             'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/', '-t', '-d',
             '--net=none', `--cpus=${this.client.config.cpus}`,
             `-m=${this.client.config.memory}`, `--memory-swap=${this.client.config.memory}`,
-            `1computer1/comp_iler:${id}`
+            `1computer1/comp_iler:${dockerID}`
         ]);
 
         try {
             await this.handleSpawn(proc);
-            this.containers.set(id, { name, count: 0 });
-            return this.containers.get(id);
+            this.containers.set(dockerID, { name, count: 0 });
+            return this.containers.get(dockerID);
         } catch (err) {
             throw err;
         }
     }
 
-    incrementCount(id) {
-        this.containers.get(id).count += 1;
+    incrementCount(dockerID) {
+        this.containers.get(dockerID).count += 1;
     }
 
     evalCode({ language, code, options }) {
-        const { id = language.id, env = {} } = language.runWith(options);
-        const queue = this.queues.get(id);
+        const { id: dockerID = language.id, env = {} } = language.runWith(options);
+        const queue = this.queues.get(dockerID);
         return queue.enqueue(async () => {
-            const { name, count } = await this.setupContainer(id);
-            this.incrementCount(id);
+            const { name, count } = await this.setupContainer(dockerID);
+            this.incrementCount(dockerID);
 
             const proc = childProcess.spawn('docker', [
                 'exec',
@@ -110,7 +110,7 @@ class LanguageHandler extends AkairoHandler {
                 const result = await this.handleSpawn(proc);
                 return result;
             } catch (err) {
-                this.containers.delete(id);
+                this.containers.delete(dockerID);
                 await this.kill(name);
                 throw err;
             }
