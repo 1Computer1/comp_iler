@@ -94,6 +94,7 @@ class LanguageHandler extends AkairoHandler {
         try {
             await this.handleSpawn(proc);
             this.containers.set(dockerID, { name, count: 0 });
+            // eslint-disable-next-line no-console
             console.log(`Started container ${name} for 1computer1/comp_iler:${dockerID}.`);
             return this.containers.get(dockerID);
         } catch (err) {
