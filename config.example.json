@@ -12,6 +12,6 @@
     "cpus": "0.25",
     "timeout": 10000,
     "prepare": false,
-    "parallel": true,
+    "parallel": false,
     "concurrent": 10
 }
