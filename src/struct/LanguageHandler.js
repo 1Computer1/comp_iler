@@ -65,6 +65,10 @@ class LanguageHandler extends AkairoHandler {
                 await this.buildImage(dockerID);
             }
         }
+
+        if (this.client.config.cleanup > 0) {
+            setInterval(() => this.cleanup().catch(() => null), this.client.config.cleanup * 60 * 1000);
+        }
     }
 
     async buildImage(dockerID) {
@@ -72,7 +76,8 @@ class LanguageHandler extends AkairoHandler {
         await util.promisify(childProcess.exec)(`docker build -t "1computer1/comp_iler:${dockerID}" ${folder}`);
         // eslint-disable-next-line no-console
         console.log(`Built image 1computer1/comp_iler:${dockerID}.`);
-        this.queues.set(dockerID, new Queue(10));
+        const concurrent = this.getCompilerConfig(dockerID, 'concurrent', 'number');
+        this.queues.set(dockerID, new Queue(concurrent));
         if (this.client.config.prepare) {
             await this.setupContainer(dockerID);
         }
@@ -83,11 +88,13 @@ class LanguageHandler extends AkairoHandler {
             return this.containers.get(dockerID);
         }
 
+        const cpus = this.getCompilerConfig(dockerID, 'cpus', 'string');
+        const memory = this.getCompilerConfig(dockerID, 'memory', 'string');
         const name = `comp_iler-${dockerID}-${Date.now()}`;
         const proc = childProcess.spawn('docker', [
             'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/', '-dt',
-            '--net=none', `--cpus=${this.client.config.cpus}`,
-            `-m=${this.client.config.memory}`, `--memory-swap=${this.client.config.memory}`,
+            '--net=none', `--cpus=${cpus}`,
+            `-m=${memory}`, `--memory-swap=${memory}`,
             `1computer1/comp_iler:${dockerID}`, '/bin/sh'
         ]);
 
@@ -120,8 +127,9 @@ class LanguageHandler extends AkairoHandler {
                 name, '/bin/sh', '/var/run/run.sh', code
             ]);
 
+            const timeout = this.getCompilerConfig(dockerID, 'timeout', 'number');
             try {
-                const result = await this.handleSpawn(proc, true);
+                const result = await this.handleSpawn(proc, timeout);
                 return result;
             } catch (err) {
                 this.containers.delete(dockerID);
@@ -131,12 +139,12 @@ class LanguageHandler extends AkairoHandler {
         });
     }
 
-    handleSpawn(proc, withTimeout = false) {
+    handleSpawn(proc, timeout = null) {
         return new Promise((resolve, reject) => {
-            if (withTimeout) {
+            if (timeout !== null) {
                 setTimeout(() => {
                     reject(new Error('Timed out'));
-                }, this.client.config.timeout);
+                }, timeout);
             }
 
             let data = '';
@@ -176,6 +184,15 @@ class LanguageHandler extends AkairoHandler {
 
     cleanup() {
         return Promise.all(this.containers.map(({ name }) => this.kill(name)));
+    }
+
+    getCompilerConfig(dockerID, key, type) {
+        const o = this.client.config[key];
+        return typeof o === type
+            ? o
+            : o[dockerID] !== null
+                ? o[dockerID]
+                : o.default;
     }
 }
 

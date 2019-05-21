@@ -106,22 +106,41 @@ The container is locked down, so there is no networking, limited memory and CPU 
 0. Install Docker 18+
 0. Install Node 10+
 0. Run `npm i`
-0. Fill out `config.json`
-    - `owner` - The owner(s) of the bot.  
-        Use an array for multiple owners.
-    - `token` - The bot token.  
-    - `prefix` - The prefix for commands.  
-    - `codePrefix` - The prefix for code evaluation.  
-    - `languages` Languages to use.  
-        The language names here are different from the user-facing ones.  
-        Check the filenames in `src/languages/` for the language names.  
-        Change to `null` to enable all languages.  
-    - `memory` Max memory usage of a container.  
-    - `cpu` Max CPU usage of a container.  
-    - `timeout` Time limit for code in milliseconds.  
-    - `prepare` Whether to start containers on setup.  
-        Setting to true will speed up the first eval, but that language might not be used.
-    - `parallel` Whether to build images and container in parallel.  
-        Faster, but will take more resources.
-    - `concurrent` Number of code evaluations per language than can run at a time.  
+0. Fill out `config.json` as described in the configuration section below
 0. Run `node .`
+
+## Configuration
+
+### Bot
+
+- `owner` - The owner(s) of the bot.  
+    Use an array for multiple owners.
+- `token` - The bot token.  
+- `prefix` - The prefix for commands.  
+- `codePrefix` - The prefix for code evaluation.  
+
+### Setup
+
+- `languages` Languages to use.  
+    The language names here are different from the user-facing ones.  
+    Check the filenames in `src/languages/` for the language names.  
+    Change to `null` to enable all languages.  
+- `prepare` Whether to start containers on setup.  
+    Setting to true will speed up the first eval, but that language might not be used.  
+- `parallel` Whether to build images in parallel.  
+    Will also setup containers in parallel if `prepare` is set.  
+    Faster, but will take more resources.  
+- `cleanup` Interval in minutes to occasionally kill all containers.  
+    Set to `0` to disable.  
+
+### Compilers
+
+For each of these options, you can use either the expected value to set it for all compilers or an object with compiler names to the expected values.  
+If using an object, you can set the default with the `default` key.  
+The compiler names are the folder names under `docker/`.  
+
+- `memory` Max memory usage of a container.  
+- `cpu` Max CPU usage of a container.  
+- `timeout` Time limit for code in milliseconds.  
+- `concurrent` Number of code evaluations than can run at a time per container.  
+    The more that can run, the more resources a container would need.   

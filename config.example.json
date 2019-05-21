@@ -8,10 +8,11 @@
         "python",
         "javascript"
     ],
+    "prepare": false,
+    "parallel": false,
+    "cleanup": 60,
     "memory": "256m",
     "cpus": "0.25",
     "timeout": 10000,
-    "prepare": false,
-    "parallel": false,
     "concurrent": 10
 }
