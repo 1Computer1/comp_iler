@@ -12,7 +12,7 @@ class Queue {
     enqueue(task) {
         return new Promise((resolve, reject) => {
             this.tasks.push({ task, resolve, reject });
-            if (this.ongoing <= this.limit) {
+            if (this.ongoing < this.limit) {
                 this.process();
             }
         });
@@ -29,7 +29,7 @@ class Queue {
         }
 
         this.ongoing--;
-        while (this.ongoing <= this.limit && this.tasks.length > 0) {
+        while (this.ongoing < this.limit && this.tasks.length > 0) {
             this.process();
         }
     }
