@@ -144,3 +144,5 @@ The compiler names are the folder names under `docker/`.
 - `timeout` Time limit for code in milliseconds.  
 - `concurrent` Number of code evaluations than can run at a time per container.  
     The more that can run, the more resources a container would need.   
+- `retries` Maximum number of retries for an evaluation.
+    Evaluations are retried when all concurrent evaluations fail because one failed.

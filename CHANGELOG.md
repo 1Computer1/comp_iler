@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0
+
+- Added retry functionality and `retries` config option.
+- Changed the strange kill message to just "Something went wrong".
+- Fixed default values not being used.
+- Fixed concurrency doing one more than set.
+- Fixed multiple containers for one compiler being set up.
+
 ## 1.4.0
 
 - Added more configuration options.
