@@ -9,8 +9,10 @@ class ExitCommand extends Command {
         });
     }
 
-    async exec() {
+    async exec(message) {
+        await message.util.send('Cleaning up...');
         await this.client.languageHandler.cleanup();
+        await message.util.send('Exiting!');
         process.exit();
     }
 }

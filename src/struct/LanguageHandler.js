@@ -104,7 +104,7 @@ class LanguageHandler extends AkairoHandler {
             await this.handleSpawn(proc);
             this.containers.set(dockerID, { name });
             // eslint-disable-next-line no-console
-            console.log(`Started container ${name} for 1computer1/comp_iler:${dockerID}.`);
+            console.log(`Started container ${name}.`);
             return this.containers.get(dockerID);
         } catch (err) {
             throw err;
@@ -167,7 +167,7 @@ class LanguageHandler extends AkairoHandler {
         });
     }
 
-    kill(name) {
+    async kill(name) {
         let cmd;
         if (process.platform === 'win32') {
             cmd = `docker kill --signal=9 ${name} >nul 2>nul`;
@@ -175,7 +175,9 @@ class LanguageHandler extends AkairoHandler {
             cmd = `docker kill --signal=9 ${name} >/dev/null 2>/dev/null`;
         }
 
-        return util.promisify(childProcess.exec)(cmd);
+        await util.promisify(childProcess.exec)(cmd);
+        // eslint-disable-next-line no-console
+        console.log(`Killed container ${name}.`);
     }
 
     cleanup() {
