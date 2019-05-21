@@ -27,12 +27,15 @@ class MessageInvalidListener extends Listener {
         }
 
         let errored = false;
-        const result = await this.client.languageHandler.evalCode(parse)
-            .catch(e => {
-                errored = true;
-                return e.message;
-            }) || '\n';
+        let result;
+        try {
+            result = await this.client.languageHandler.evalCode(parse);
+        } catch (e) {
+            errored = true;
+            result = e.message;
+        }
 
+        result = result || '';
         if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
             if (reaction) {
                 reaction.users.remove();

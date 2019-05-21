@@ -129,7 +129,14 @@ class LanguageHandler extends AkairoHandler {
                 return result;
             } catch (err) {
                 this.containers.delete(dockerID);
-                await this.kill(name);
+                try {
+                    await this.kill(name);
+                } catch (err2) {
+                    // Kill did not work, usually this is because of the container being killed just before.
+                    // Happens when evals are done in quick succession and the container can't handle it.
+                    // Solution is to lower the concurrent setting for that compiler.
+                }
+
                 throw err;
             }
         });
@@ -137,13 +144,16 @@ class LanguageHandler extends AkairoHandler {
 
     handleSpawn(proc, timeout = null) {
         return new Promise((resolve, reject) => {
+            let handled = false;
             if (timeout !== null) {
                 setTimeout(() => {
+                    handled = true;
                     reject(new Error('Timed out'));
                 }, timeout);
             }
 
             let data = '';
+            let error;
             proc.stdout.on('data', chunk => {
                 data += chunk;
             });
@@ -152,16 +162,22 @@ class LanguageHandler extends AkairoHandler {
                 data += chunk;
             });
 
-            proc.on('error', error => {
-                error.data = data;
-                reject(error);
+            proc.on('error', e => {
+                error = e;
             });
 
-            proc.on('exit', status => {
-                if (status !== 0) {
-                    reject(new Error(data));
-                } else {
-                    resolve(data);
+            proc.on('close', status => {
+                if (!handled) {
+                    handled = true;
+                    if (status !== 0 || error) {
+                        if (!error) {
+                            error = new Error(data || 'Something went wrong');
+                        }
+
+                        reject(error);
+                    } else {
+                        resolve(data);
+                    }
                 }
             });
         });
