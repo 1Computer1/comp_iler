@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.4.0
+
+- Added more configuration options.
+    - `parallel` to build and setup in parallel.
+    - `cleanup` to periodically kill containers.
+    - `cpus`, `memory`, `timeout`, `concurrent` can be per-compiler.
+- Added more info to the `>about` command.
+- Added logging about images and containers.
+- Fixed `concurrent` option being ignored.
+- Fixed languages with more than one compiler erroring on startup.
+- Fixed timing out on setup.
+- Fixed some containers exiting immediately.
+- Fixed `go` erroring about cache directory.
+
 ## 1.3.0
 
 - Added `concurrent` config option.

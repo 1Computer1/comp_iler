@@ -1,6 +1,6 @@
 {
   "name": "comp_iler",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Sandboxed eval bot",
   "main": "src/index.js",
   "author": "1Computer1",
