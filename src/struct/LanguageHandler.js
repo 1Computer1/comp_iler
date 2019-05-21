@@ -111,7 +111,7 @@ class LanguageHandler extends AkairoHandler {
         }
     }
 
-    evalCode({ language, code, options }) {
+    evalCode({ language, code, options, retries = 0 }) {
         const { id: dockerID = language.id, env = {} } = language.runWith(options);
         const queue = this.queues.get(dockerID);
         return queue.enqueue(async () => {
@@ -132,9 +132,12 @@ class LanguageHandler extends AkairoHandler {
                 try {
                     await this.kill(name);
                 } catch (err2) {
-                    // Kill did not work, usually this is because of the container being killed just before.
-                    // Happens when evals are done in quick succession and the container can't handle it.
-                    // Solution is to lower the concurrent setting for that compiler.
+                    // The container was not alive to be killed, i.e. multiple evals were occuring,
+                    // one of them caused the container to be killed, the remaining evals all fail.
+                    // Retry those remaining ones until they work!
+                    if (retries < this.getCompilerConfig(dockerID, 'retries', 'number')) {
+                        return this.evalCode({ language, code, options, retries: retries + 1 });
+                    }
                 }
 
                 throw err;

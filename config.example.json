@@ -14,5 +14,6 @@
     "memory": "256m",
     "cpus": "0.25",
     "timeout": 10000,
-    "concurrent": 10
+    "concurrent": 10,
+    "retries": 2
 }
