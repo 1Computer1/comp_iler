@@ -8,6 +8,7 @@
     - `cpus`, `memory`, `timeout`, `concurrent` can be per-compiler.
 - Added more info to the `>about` command.
 - Added logging about images and containers.
+- Changed folder names to use the current time.
 - Fixed `concurrent` option being ignored.
 - Fixed languages with more than one compiler erroring on startup.
 - Fixed timing out on setup.
