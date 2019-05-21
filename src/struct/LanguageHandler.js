@@ -204,7 +204,7 @@ class LanguageHandler extends AkairoHandler {
         const o = this.client.config[key];
         return typeof o === type
             ? o
-            : o[dockerID] !== null
+            : o[dockerID] !== undefined
                 ? o[dockerID]
                 : o.default;
     }
