@@ -1,7 +1,7 @@
-mkdir "$COUNT" && cd "$COUNT"
+mkdir "$CODEDIR" && cd "$CODEDIR"
 
-export GOCACHE=/tmp/"$COUNT"/cache
+export GOCACHE=/tmp/"$CODEDIR"/cache
 echo "$1" > program.go
 go run program.go
 
-cd .. && rm -rf "$COUNT"
+cd .. && rm -rf "$CODEDIR"

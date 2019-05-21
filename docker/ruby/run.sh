@@ -1,6 +1,6 @@
-mkdir "$COUNT" && cd "$COUNT"
+mkdir "$CODEDIR" && cd "$CODEDIR"
 
 echo "$1" > program.rb
 ruby program.rb
 
-cd .. && rm -rf "$COUNT"
+cd .. && rm -rf "$CODEDIR"

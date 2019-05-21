@@ -1,6 +1,6 @@
-mkdir "$COUNT" && cd "$COUNT"
+mkdir "$CODEDIR" && cd "$CODEDIR"
 
 echo "$1" > program.ml
 ocamlopt -cclib --static -o program program.ml && ./program
 
-cd .. && rm -rf "$COUNT"
+cd .. && rm -rf "$CODEDIR"

@@ -1,6 +1,6 @@
-mkdir "$COUNT" && cd "$COUNT"
+mkdir "$CODEDIR" && cd "$CODEDIR"
 
 echo "$1" > program.lua
 lua5.3 program.lua
 
-cd .. && rm -rf "$COUNT"
+cd .. && rm -rf "$CODEDIR"

@@ -102,7 +102,7 @@ class LanguageHandler extends AkairoHandler {
 
         try {
             await this.handleSpawn(proc);
-            this.containers.set(dockerID, { name, count: 0 });
+            this.containers.set(dockerID, { name });
             // eslint-disable-next-line no-console
             console.log(`Started container ${name} for 1computer1/comp_iler:${dockerID}.`);
             return this.containers.get(dockerID);
@@ -111,20 +111,14 @@ class LanguageHandler extends AkairoHandler {
         }
     }
 
-    incrementCount(dockerID) {
-        this.containers.get(dockerID).count += 1;
-    }
-
     evalCode({ language, code, options }) {
         const { id: dockerID = language.id, env = {} } = language.runWith(options);
         const queue = this.queues.get(dockerID);
         return queue.enqueue(async () => {
-            const { name, count } = await this.setupContainer(dockerID);
-            this.incrementCount(dockerID);
-
+            const { name } = await this.setupContainer(dockerID);
             const proc = childProcess.spawn('docker', [
                 'exec',
-                `-eCOUNT=${count}`,
+                `-eCODEDIR=${Date.now()}`,
                 ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
                 name, '/bin/sh', '/var/run/run.sh', code
             ]);

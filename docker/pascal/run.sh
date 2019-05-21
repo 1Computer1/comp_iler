@@ -1,4 +1,4 @@
-mkdir "$COUNT" && cd "$COUNT"
+mkdir "$CODEDIR" && cd "$CODEDIR"
 
 echo "$1" > program.pas
 
@@ -12,4 +12,4 @@ else
   exit 1
 fi
 
-cd .. && rm -rf "$COUNT"
+cd .. && rm -rf "$CODEDIR"

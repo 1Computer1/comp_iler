@@ -1,10 +1,10 @@
 if [ "$EVAL_EXPR" = "true" ]; then
     ghc -e "$1"
 else
-    mkdir "$COUNT" && cd "$COUNT"
+    mkdir "$CODEDIR" && cd "$CODEDIR"
 
     echo "$1" > program.hs
     ghc -e main program.hs
 
-    cd .. && rm -rf "$COUNT"
+    cd .. && rm -rf "$CODEDIR"
 fi

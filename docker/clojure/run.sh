@@ -1,6 +1,6 @@
-mkdir "$COUNT" && cd "$COUNT"
+mkdir "$CODEDIR" && cd "$CODEDIR"
 
 echo "$1" > program.clj
 clojure program.clj
 
-cd .. && rm -rf "$COUNT"
+cd .. && rm -rf "$CODEDIR"
