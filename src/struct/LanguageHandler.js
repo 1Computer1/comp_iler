@@ -33,7 +33,9 @@ class LanguageHandler extends AkairoHandler {
 
         for (let alias of language.aliases) {
             const conflict = this.aliases.get(alias.toLowerCase());
-            if (conflict) throw new TypeError(`Alias conflict of ${alias} between ${language.id} and ${conflict}`);
+            if (conflict) {
+                throw new TypeError(`Alias conflict of ${alias} between ${language.id} and ${conflict}`);
+            }
 
             alias = alias.toLowerCase();
             this.aliases.set(alias, language.id);
