@@ -79,7 +79,7 @@ class LanguageHandler extends AkairoHandler {
         // eslint-disable-next-line no-console
         console.log(`Built image 1computer1/comp_iler:${dockerID}.`);
         const concurrent = this.getCompilerConfig(dockerID, 'concurrent', 'number');
-        this.queues.set(dockerID, new Queue(concurrent));
+        this.queues.set(dockerID, { evalQueue: new Queue(concurrent), setupQueue: new Queue(1) });
         if (this.client.config.prepare) {
             await this.setupContainer(dockerID);
         }
@@ -113,9 +113,9 @@ class LanguageHandler extends AkairoHandler {
 
     evalCode({ language, code, options, retries = 0 }) {
         const { id: dockerID = language.id, env = {} } = language.runWith(options);
-        const queue = this.queues.get(dockerID);
-        return queue.enqueue(async () => {
-            const { name } = await this.setupContainer(dockerID);
+        const { evalQueue, setupQueue } = this.queues.get(dockerID);
+        return evalQueue.enqueue(async () => {
+            const { name } = await setupQueue.enqueue(() => this.setupContainer(dockerID));
             const proc = childProcess.spawn('docker', [
                 'exec',
                 `-eCODEDIR=${Date.now()}`,
