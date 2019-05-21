@@ -1,4 +1,5 @@
-const { Command } = require('discord-akairo');
+const { Command, version: akairoVersion } = require('discord-akairo');
+const { version: djsVersion } = require('discord.js');
 
 class AboutCommand extends Command {
     constructor() {
@@ -11,7 +12,15 @@ class AboutCommand extends Command {
     exec(message) {
         return message.util.send([
             'Comp_iler is made by 1Computer.',
-            'Source code is available at <https://github.com/1Computer1/comp_iler>.'
+            'Source code is available at <https://github.com/1Computer1/comp_iler>.',
+            '',
+            `**Guilds**: ${this.client.guilds.size}`,
+            `**Channels**: ${this.client.channels.size}`,
+            `**Users**: ${this.client.users.size}`,
+            '',
+            `**Memory Usage**: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
+            `**Discord.js**: v${djsVersion}`,
+            `**Akairo**: v${akairoVersion}`
         ]);
     }
 }
