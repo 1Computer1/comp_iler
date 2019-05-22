@@ -79,7 +79,6 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
 - `java` Java (OpenJDK)
 - `js` JavaScript (Node)
     - `harmony` enables harmony features (`--harmony` on node)
-    - `e` prints the result of evaluating the code
 - `julia` Julia
     - `e` prints the result of evaluating the code
 - `lisp` Racket

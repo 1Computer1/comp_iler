@@ -6,8 +6,7 @@ class JavaScript extends Language {
             name: 'JavaScript',
             aliases: ['javascript', 'js'],
             options: {
-                harmony: () => '',
-                e: () => ''
+                harmony: () => ''
             }
         });
     }
@@ -16,10 +15,6 @@ class JavaScript extends Language {
         const ret = { id: this.id, env: {} };
         if (options.has('harmony')) {
             ret.env.EVAL_HARMONY = 'true';
-        }
-
-        if (options.has('e')) {
-            ret.env.EVAL_EXPR = 'true';
         }
 
         return ret;
