@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0
+
+- Added `>cleanup` command.
+- Changed JS to always use `-p` to evaluate expressions.
+
 ## 1.5.0
 
 - Added retry functionality and `retries` config option.
