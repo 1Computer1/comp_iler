@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    char* ops = argv[1];
+    char *ops = argv[1];
     std::vector<char> tape = { 0 };
     int oix = 0;
     int tix = 0;
