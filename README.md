@@ -66,6 +66,7 @@ One of the following language codes is set in `lang`.
 Options are optionally set in `options`, which is a semicolon-delimited list of `flag` or `flag=value`. 
 
 - `bash` Bash
+- `bf` Brainfuck
 - `c` C (GCC)
 - `clj` Clojure
 - `cpp` C++ (G++)
