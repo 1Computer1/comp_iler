@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.0
+
+- Added the Brainfuck language.
+
 ## 1.6.0
 
 - Added `>cleanup` command.
