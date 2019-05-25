@@ -65,6 +65,7 @@ console.log(new Foo().bar);
 One of the following language codes is set in `lang`.  
 Options are optionally set in `options`, which is a semicolon-delimited list of `flag` or `flag=value`. 
 
+- `apl` APL
 - `bash` Bash
 - `bf` Brainfuck
 - `c` C (GCC)
