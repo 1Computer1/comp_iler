@@ -11,4 +11,5 @@ RUN apt-get update && \
 
 ENV PATH /opt/ghc/8.6.5/bin:$PATH
 
+COPY .ghci $HOME/
 COPY run.sh /var/run/

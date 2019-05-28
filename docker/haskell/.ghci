@@ -1,0 +1,18 @@
+import Data.Bool
+import Data.Char
+import Data.Either
+import Data.Function
+import Data.List
+import Data.Maybe
+import Data.Ord
+import Control.Applicative
+import Control.Monad
+
+import Data.Map (Map)
+import qualified Data.Map as Map
+import Data.Set (Set)
+import qualified Data.Set as Set
+import Data.Sequence (Seq)
+import qualified Data.Sequence as Seq
+import Data.Tree (Tree)
+import qualified Data.Tree as Tree
