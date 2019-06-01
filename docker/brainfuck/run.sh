@@ -1,1 +1,1 @@
-printf %s "$1" | bf
+printf %s "$1" | bf || true

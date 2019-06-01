@@ -4,7 +4,7 @@ else
     mkdir "$CODEDIR" && cd "$CODEDIR"
 
     printf %s "$1" > program.cs
-    csc program.cs >/dev/null && mono program.exe
+    csc program.cs >/dev/null && mono program.exe || true
 
     cd .. && rm -rf "$CODEDIR"
 fi

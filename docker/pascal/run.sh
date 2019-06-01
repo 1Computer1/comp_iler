@@ -6,10 +6,9 @@ printf %s "$1" > program.pas
 res="$(fpc program.pas 2>&1)"
 
 if [ $? -eq 0 ]; then
-  ./program
+    ./program || true
 else
-  printf %s "$res"
-  exit 1
+    printf %s "$res"
 fi
 
 cd .. && rm -rf "$CODEDIR"
