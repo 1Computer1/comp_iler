@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.8.0
+
+- Added the APL language.
+- Added imports to Haskell's `e` mode.
+- Fixed special characters interfering with run scripts.
+- Fixed simple errors (non-zero exit codes) from killing containers.
+    - This may be reversed if it causes problems. 
+
 ## 1.7.0
 
 - Added the Brainfuck language.
