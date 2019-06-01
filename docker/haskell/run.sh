@@ -3,7 +3,7 @@ if [ "$EVAL_EXPR" = "true" ]; then
 else
     mkdir "$CODEDIR" && cd "$CODEDIR"
 
-    echo "$1" > program.hs
+    printf %s "$1" > program.hs
     ghc -e main program.hs
 
     cd .. && rm -rf "$CODEDIR"

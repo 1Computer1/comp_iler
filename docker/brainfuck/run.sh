@@ -1,1 +1,1 @@
-bf "$1"
+printf %s "$1" | bf

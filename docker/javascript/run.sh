@@ -1,5 +1,5 @@
 if [ "$EVAL_HARMONY" = "true" ]; then
-    node --harmony -p "$1"
+    printf %s "$1" | node --harmony -p
 else
-    node -p "$1"
+    printf %s "$1" | node -p
 fi

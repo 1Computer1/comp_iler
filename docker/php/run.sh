@@ -1,1 +1,1 @@
-php -r "$1"
+printf %s "$1" | php -r

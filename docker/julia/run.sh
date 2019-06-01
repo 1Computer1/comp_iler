@@ -1,5 +1,5 @@
 if [ "$EVAL_EXPR" = "true" ]; then
-    julia -E "$1"
+    printf %s "$1" | julia -E
 else
-    julia -e "$1"
+    printf %s "$1" | julia -e
 fi
