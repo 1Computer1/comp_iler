@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.0
+
+- Added `languages` command.
+- Fixed incorrect prefix in help info.
+- Fixed Brainfuck input.
+- Fixed typos.
+
 ## 1.8.0
 
 - Added the APL language.
