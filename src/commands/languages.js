@@ -13,7 +13,7 @@ class LanguagesCommand extends Command {
             '**List of enabled languages (Name: Language Codes)**:',
             ...this.client.languageHandler.modules.map(lang => `${lang.name}: \`${lang.aliases.join('`, `')}\``),
             '',
-            'See the readme for usage examples, supported langagues, and options: <https://github.com/1Computer/comp_iler>'
+            'See the readme for usage examples, supported languages, and options: <https://github.com/1Computer1/comp_iler>'
         ]);
     }
 }

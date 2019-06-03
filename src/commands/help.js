@@ -14,7 +14,7 @@ class HelpCommand extends Command {
             'Put a `>` before a code block or inline codeblock that starts with a language code to execute it.',
             'You can add options, separated by semicolons, after the `>`.',
             '',
-            'For list of enabled languages, use `languages` command.',
+            'For list of enabled languages, use the `>languages` command.',
             '',
             'See the readme for usage examples, supported languages, and options: <https://github.com/1Computer1/comp_iler>'
         ]);
