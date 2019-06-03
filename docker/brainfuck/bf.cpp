@@ -1,18 +1,28 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
+#include <string>
 
 int main(int argc, char **argv) {
+    std::string ops;
     if (argc == 1) {
-        std::cerr << "No input given";
-        return 1;
+        std::string line;
+        while (std::getline(std::cin, line)) {
+            ops.append(line);
+        }
+
+        if (ops.empty()) {
+            std::cerr << "No input given";
+            return 1;
+        }
+    } else {
+        ops.assign(argv[1], strlen(argv[1]));
     }
 
-    char *ops = argv[1];
+    int len = ops.length();
     std::vector<char> tape = { 0 };
     int oix = 0;
     int tix = 0;
-    int len = strlen(ops);
     while (oix < len) {
         switch (ops[oix]) {
             case '>':
