@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.10.1
+
+- Fixed cleanup not invalidating cache.
+- Fixed errors not causing containers to be cleaned up.
+
 ## 1.10.0
 
 - Changed how workspaces are made, evaluations should only have access to their own folder now.
