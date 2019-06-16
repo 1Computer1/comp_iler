@@ -208,7 +208,10 @@ class LanguageHandler extends AkairoHandler {
     }
 
     cleanup() {
-        return Promise.all(this.containers.map(({ name }) => this.kill(name)));
+        return Promise.all(this.containers.map(({ name }, dockerID) => {
+            this.containers.delete(dockerID);
+            return this.kill(name);
+        }));
     }
 
     getCompilerConfig(dockerID, key, type) {
