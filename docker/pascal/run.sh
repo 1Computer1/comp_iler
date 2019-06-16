@@ -1,5 +1,3 @@
-mkdir "$CODEDIR" && cd "$CODEDIR"
-
 printf %s "$1" > program.pas
 
 # fpc does not use stderr, ld however does, capture both
@@ -10,5 +8,3 @@ if [ $? -eq 0 ]; then
 else
     printf %s "$res"
 fi
-
-cd .. && rm -rf "$CODEDIR"

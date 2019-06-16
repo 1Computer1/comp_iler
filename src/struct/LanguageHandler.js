@@ -6,6 +6,8 @@ const childProcess = require('child_process');
 const util = require('util');
 const path = require('path');
 
+const exec = util.promisify(childProcess.exec);
+
 class LanguageHandler extends AkairoHandler {
     constructor(client, {
         directory,
@@ -93,15 +95,16 @@ class LanguageHandler extends AkairoHandler {
         const cpus = this.getCompilerConfig(dockerID, 'cpus', 'string');
         const memory = this.getCompilerConfig(dockerID, 'memory', 'string');
         const name = `comp_iler-${dockerID}-${Date.now()}`;
-        const proc = childProcess.spawn('docker', [
-            'run', '--rm', `--name=${name}`, '-u1000', '-w/tmp/', '-dt',
-            '--net=none', `--cpus=${cpus}`,
-            `-m=${memory}`, `--memory-swap=${memory}`,
-            `1computer1/comp_iler:${dockerID}`, '/bin/sh'
-        ]);
-
         try {
-            await this.handleSpawn(proc);
+            await exec([
+                `docker run --rm --name=${name}`,
+                '-u1000:1000 -w/tmp/ -dt',
+                `--net=none --cpus=${cpus} -m=${memory} --memory-swap=${memory}`,
+                `1computer1/comp_iler:${dockerID} /bin/sh`
+            ].join(' '));
+
+            await exec(`docker exec ${name} mkdir eval`);
+            await exec(`docker exec ${name} chmod 711 eval`);
             this.containers.set(dockerID, { name });
             // eslint-disable-next-line no-console
             console.log(`Started container ${name}.`);
@@ -116,9 +119,11 @@ class LanguageHandler extends AkairoHandler {
         const { evalQueue, setupQueue } = this.queues.get(dockerID);
         return evalQueue.enqueue(async () => {
             const { name } = await setupQueue.enqueue(() => this.setupContainer(dockerID));
+            const now = Date.now();
+            await exec(`docker exec ${name} mkdir eval/${now}`);
+            await exec(`docker exec ${name} chmod 777 eval/${now}`);
             const proc = childProcess.spawn('docker', [
-                'exec',
-                `-eCODEDIR=${Date.now()}`,
+                'exec', '-u1001:1001', `-w/tmp/eval/${now}`,
                 ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
                 name, '/bin/sh', '/var/run/run.sh', code
             ]);
@@ -126,6 +131,7 @@ class LanguageHandler extends AkairoHandler {
             const timeout = this.getCompilerConfig(dockerID, 'timeout', 'number');
             try {
                 const result = await this.handleSpawn(proc, timeout);
+                await exec(`docker exec ${name} rm -rf eval/${now}`);
                 return result;
             } catch (err) {
                 this.containers.delete(dockerID);
@@ -196,7 +202,7 @@ class LanguageHandler extends AkairoHandler {
             cmd = `docker kill --signal=9 ${name} >/dev/null 2>/dev/null`;
         }
 
-        await util.promisify(childProcess.exec)(cmd);
+        await exec(cmd);
         // eslint-disable-next-line no-console
         console.log(`Killed container ${name}.`);
     }
