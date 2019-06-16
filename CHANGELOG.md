@@ -3,6 +3,7 @@
 ## 1.10.0
 
 - Changed how workspaces are made, evaluations should only have access to their own folder now.
+- Fixed missing output when both stdout and stderr are used.
 - Fixed PHP.
 
 ## 1.9.0
