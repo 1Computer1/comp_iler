@@ -29,13 +29,7 @@ class MessageInvalidListener extends Listener {
         let errored = false;
         let result;
         try {
-            const { stdout, stderr } = await this.client.languageHandler.evalCode(parse);
-            if (stderr) {
-                errored = true;
-                result = stderr;
-            } else {
-                result = stdout;
-            }
+            ({ output: result, hasStderr: errored } = await this.client.languageHandler.evalCode(parse));
         } catch (e) {
             errored = true;
             result = e.message;

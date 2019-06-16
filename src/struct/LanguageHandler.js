@@ -155,15 +155,16 @@ class LanguageHandler extends AkairoHandler {
                 }, timeout);
             }
 
-            let stdout = '';
-            let stderr = '';
+            let output = '';
+            let hasStderr = false;
             let error;
             proc.stdout.on('data', chunk => {
-                stdout += chunk;
+                output += chunk;
             });
 
             proc.stderr.on('data', chunk => {
-                stderr += chunk;
+                hasStderr = true;
+                output += chunk;
             });
 
             proc.on('error', e => {
@@ -175,12 +176,12 @@ class LanguageHandler extends AkairoHandler {
                     handled = true;
                     if (status !== 0 || error) {
                         if (!error) {
-                            error = new Error(stderr || 'Something went wrong');
+                            error = new Error(output || 'Something went wrong');
                         }
 
                         reject(error);
                     } else {
-                        resolve({ stdout, stderr });
+                        resolve({ output, hasStderr });
                     }
                 }
             });
