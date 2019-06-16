@@ -120,16 +120,16 @@ class LanguageHandler extends AkairoHandler {
         return evalQueue.enqueue(async () => {
             const { name } = await setupQueue.enqueue(() => this.setupContainer(dockerID));
             const now = Date.now();
-            await exec(`docker exec ${name} mkdir eval/${now}`);
-            await exec(`docker exec ${name} chmod 777 eval/${now}`);
-            const proc = childProcess.spawn('docker', [
-                'exec', '-u1001:1001', `-w/tmp/eval/${now}`,
-                ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
-                name, '/bin/sh', '/var/run/run.sh', code
-            ]);
-
-            const timeout = this.getCompilerConfig(dockerID, 'timeout', 'number');
             try {
+                await exec(`docker exec ${name} mkdir eval/${now}`);
+                await exec(`docker exec ${name} chmod 777 eval/${now}`);
+                const proc = childProcess.spawn('docker', [
+                    'exec', '-u1001:1001', `-w/tmp/eval/${now}`,
+                    ...Object.entries(env).map(([k, v]) => `-e${k}=${v}`),
+                    name, '/bin/sh', '/var/run/run.sh', code
+                ]);
+
+                const timeout = this.getCompilerConfig(dockerID, 'timeout', 'number');
                 const result = await this.handleSpawn(proc, timeout);
                 await exec(`docker exec ${name} rm -rf eval/${now}`);
                 return result;
