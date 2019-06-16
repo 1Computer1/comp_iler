@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.10.0
+
+- Changed how workspaces are made, evaluations should only have access to their own folder now.
+- Fixed PHP.
+
 ## 1.9.0
 
 - Added `languages` command.
