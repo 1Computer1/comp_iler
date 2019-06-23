@@ -4,19 +4,8 @@ class Julia extends Language {
     constructor() {
         super('julia', {
             name: 'Julia',
-            aliases: ['julia'],
-            options: {
-                e: () => ''
-            }
+            aliases: ['julia']
         });
-    }
-
-    runWith(options) {
-        if (options.has('e')) {
-            return { env: { EVAL_EXPR: 'true' } };
-        }
-
-        return {};
     }
 }
 
