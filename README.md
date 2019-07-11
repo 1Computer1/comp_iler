@@ -5,32 +5,6 @@ Sandboxed code execution discord bot.
 
 ## Usage
 
-### Code Blocks
-
-````
->```lang
-code
-```
-````
-
-````
->options```lang
-code
-```
-````
-
-### Inline Code
-
-```
->`lang code`
-```
-
-```
->options`lang code`
-```
-
-### Examples
-
 ````
 >```cpp
 #include <iostream>
