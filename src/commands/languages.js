@@ -1,19 +1,21 @@
 const { Command } = require('discord-akairo');
+const Myriad = require('../struct/Myriad');
 
 class LanguagesCommand extends Command {
     constructor() {
         super('languages', {
-            aliases: ['languages', 'language'],
+            aliases: ['languages', 'language', 'langs', 'lang'],
             clientPermissions: ['SEND_MESSAGES']
         });
     }
 
-    exec(message) {
+    async exec(message) {
+        const languages = await this.client.myriad.getLanguages();
         return message.util.send([
-            '**List of enabled languages (Name: Language Codes)**:',
-            ...this.client.languageHandler.modules.map(lang => `${lang.name}: \`${lang.aliases.join('`, `')}\``),
+            '**List of enabled languages (Language Codes)**:',
+            ...languages.map(lang => `\`${Myriad.Languages.get(lang).join('`, `')}\``),
             '',
-            'See the readme for usage examples, supported languages, and options: <https://github.com/1Computer1/comp_iler>'
+            'See the readme for usage examples: <https://github.com/1Computer1/comp_iler>'
         ]);
     }
 }
