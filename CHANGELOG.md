@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0
+
+- Ported Comp_iler backend to [Myriad](https://github.com/1Computer1/myriad).
+- Removed `exit` command.
+- Removed evaluation options.
+- Removed Python 2.
+
 ## 1.10.1
 
 - Fixed cleanup not invalidating cache.

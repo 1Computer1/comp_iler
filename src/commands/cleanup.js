@@ -11,7 +11,7 @@ class CleanupCommand extends Command {
 
     async exec(message) {
         await message.util.send('Cleaning up...');
-        await this.client.languageHandler.cleanup();
+        await this.client.myriad.postCleanup();
         await message.util.send('Cleaned up!');
     }
 }

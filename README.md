@@ -42,22 +42,8 @@ int main()
 ```
 ````
 
-````
->harmony```js
-class Foo {
-    bar = 1;
-}
-
-console.log(new Foo().bar);
-```
-````
-
 ```
 >`py print('hello world')`
-```
-
-```
->e`hs (+) <$> Just 1 <*> Just 2`
 ```
 
 ## Supported Languages and Options
@@ -68,81 +54,50 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
 - `apl` APL
 - `bash` Bash
 - `bf` Brainfuck
-- `c` C (GCC)
+- `c` C
 - `clj` Clojure
-- `cpp` C++ (G++)
-- `cs` C# (Mono)
-    - `e` evaluates a single expression instead of a module
+- `cpp` C++
+- `cs` C#
 - `elixir` Elixir
-- `fs` F# (Mono)
+- `fs` F#
 - `go` Go
-- `hs` Haskell (GHC)
-    - `e` evaluates a single expression instead of a module
-- `java` Java (OpenJDK)
-- `js` JavaScript (Node)
-    - `harmony` enables harmony features (`--harmony` on node)
+- `hs` Haskell
+- `java` Java
+- `js` JavaScript
 - `julia` Julia
 - `lisp` Racket
 - `lua` Lua
 - `ocaml` OCaml
-- `pas` Pascal (FPC)
+- `pas` Pascal
 - `php` PHP
 - `pl` Perl5
-- `prolog` Prolog (SWI-Prolog)
-- `py` Python (CPython)
-    - `2` runs Python 2 instead of Python 3
+- `prolog` Prolog
+- `py` Python
 - `rb` Ruby
 - `rs` Rust
 
 ## How it Works
 
-Read the source code, specifically `src/struct/LanguageHandler.js`.  
-In summary, for every language there is a docker image which spins up a docker container.  
+For every language there is a docker image which spins up a docker container.  
 The container is used for all evaluations of code, restarting if something goes wrong.  
 The container is locked down, so there is no networking, limited memory and CPU usage, and a time limit.  
 
 ## Setup
 
-0. Install Docker 18+
-0. Install Node 10+
+0. Install [Docker 18+](https://www.docker.com/)
+0. Install [Node 10+](https://nodejs.org/)
+0. Install [Myriad](https://github.com/1Computer1/myriad)
+    - This will require [Stack 2+](https://docs.haskellstack.org/en/stable/README/).
+    - You will also have to configure Myriad, see its repository.
+0. Fill out `config.json`
+    - `owner` The owner(s) of the bot. Use an array for multiple owners.
+    - `token` The bot token.
+    - `prefix` The prefix for commands.
+    - `codePrefix` The prefix for code evaluation.
+    - `myriad` The port that Myriad is running on.
 0. Run `npm i`
-0. Fill out `config.json` as described in the configuration section below
+
+## Running
+
+0. Run `myriad --config path/to/config.dhall`
 0. Run `node .`
-
-## Configuration
-
-### Bot
-
-- `owner` - The owner(s) of the bot.  
-    Use an array for multiple owners.
-- `token` - The bot token.  
-- `prefix` - The prefix for commands.  
-- `codePrefix` - The prefix for code evaluation.  
-
-### Setup
-
-- `languages` Languages to use.  
-    The language names here are different from the user-facing ones.  
-    Check the filenames in `src/languages/` for the language names.  
-    Change to `null` to enable all languages.  
-- `prepare` Whether to start containers on setup.  
-    Setting to true will speed up the first eval, but that language might not be used.  
-- `parallel` Whether to build images in parallel.  
-    Will also setup containers in parallel if `prepare` is set.  
-    Faster, but will take more resources.  
-- `cleanup` Interval in minutes to occasionally kill all containers.  
-    Set to `0` to disable.  
-
-### Compilers
-
-For each of these options, you can use either the expected value to set it for all compilers or an object with compiler names to the expected values.  
-If using an object, you can set the default with the `default` key.  
-The compiler names are the folder names under `docker/`.  
-
-- `memory` Max memory usage of a container.  
-- `cpu` Max CPU usage of a container.  
-- `timeout` Time limit for code in milliseconds.  
-- `concurrent` Number of code evaluations than can run at a time per container.  
-    The more that can run, the more resources a container would need.   
-- `retries` Maximum number of retries for an evaluation.
-    Evaluations are retried when all concurrent evaluations fail because one failed.

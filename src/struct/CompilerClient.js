@@ -1,5 +1,5 @@
 const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
-const LanguageHandler = require('./LanguageHandler');
+const Myriad = require('./Myriad');
 const path = require('path');
 
 class CompilerClient extends AkairoClient {
@@ -24,25 +24,19 @@ class CompilerClient extends AkairoClient {
             directory: path.join(__dirname, '../listeners')
         });
 
-        this.languageHandler = new LanguageHandler(this, {
-            directory: path.join(__dirname, '../languages')
-        });
-
+        this.myriad = new Myriad(config.myriad);
         this.config = config;
     }
 
-    async start() {
+    start() {
         this.commandHandler.useListenerHandler(this.listenerHandler);
         this.listenerHandler.setEmitters({
             commandHandler: this.commandHandler,
-            listenerHandler: this.listenerHandler,
-            languageHandler: this.languageHandler
+            listenerHandler: this.listenerHandler
         });
 
         this.commandHandler.loadAll();
         this.listenerHandler.loadAll();
-        this.languageHandler.loadAll();
-        await this.languageHandler.buildDocker();
         return this.login(this.config.token);
     }
 }

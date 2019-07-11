@@ -3,17 +3,5 @@
     "token": "MTU1fdsYNTRb2RT.FcD2l1ig.jIuKqwertyd432RROhF5A",
     "prefix": ">",
     "codePrefix": ">",
-    "languages": [
-        "haskell",
-        "python",
-        "javascript"
-    ],
-    "prepare": false,
-    "parallel": false,
-    "cleanup": 60,
-    "memory": "256m",
-    "cpus": "0.25",
-    "timeout": 10000,
-    "concurrent": 10,
-    "retries": 2
+    "myriad": "8081"
 }
