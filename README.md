@@ -23,7 +23,7 @@ int main()
 ## Supported Languages and Options
 
 One of the following language codes is set in `lang`.  
-Options are optionally set in `options`, which is a semicolon-delimited list of `flag` or `flag=value`. 
+You can see all the possible codes using the `languages` command in the bot.  
 
 - `apl` APL
 - `bash` Bash
@@ -36,6 +36,7 @@ Options are optionally set in `options`, which is a semicolon-delimited list of 
 - `fs` F#
 - `go` Go
 - `hs` Haskell
+- `idr` Idris
 - `java` Java
 - `js` JavaScript
 - `julia` Julia

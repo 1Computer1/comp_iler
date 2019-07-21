@@ -61,6 +61,7 @@ const entries = [
     ['fsharp', ['fsharp', 'fs']],
     ['go', ['golang', 'go']],
     ['haskell', ['haskell', 'hs']],
+    ['idris', ['idris', 'idr']],
     ['java', ['java']],
     ['javascript', ['javascript', 'js']],
     ['julia', ['julia']],
