@@ -21,7 +21,7 @@ class Myriad {
         });
 
         if (!response.ok) {
-            if (response.status === 404 && /^Language .+? was not found$/.test(response.statusText)) {
+            if (response.status === 404 && response.statusText === 'Not Found') {
                 return [false, 'Invalid language'];
             }
 
@@ -33,7 +33,7 @@ class Myriad {
                 return [false, 'Evaluation timed out'];
             }
 
-            throw new Error(`Unexpected ${response.status} response from ['Myriad', ${response.statusText}`);
+            throw new Error(`Unexpected ${response.status} response from Myriad, ${response.statusText}`);
         }
 
         const body = await response.json();
