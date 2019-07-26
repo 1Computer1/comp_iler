@@ -59,7 +59,7 @@ class MessageInvalidListener extends Listener {
             return null;
         }
 
-        const regex = /^\s*(`{1,3})(.+?)\n([^]+)\1\s*$/;
+        const regex = /^\s*(`{1,3})(.+?)[ \n]([^]+)\1\s*$/;
         const match = message.content.slice(prefix.length).match(regex);
         if (!match) {
             return null;
