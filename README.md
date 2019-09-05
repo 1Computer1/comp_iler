@@ -59,20 +59,20 @@ The container is locked down, so there is no networking, limited memory and CPU 
 
 ## Setup
 
-0. Install [Docker 18+](https://www.docker.com/)
-0. Install [Node 10+](https://nodejs.org/)
-0. Install [Myriad](https://github.com/1Computer1/myriad)
-    - This will require [Stack 2+](https://docs.haskellstack.org/en/stable/README/).
+1. Install [Docker 18+](https://www.docker.com/)
+2. Install [Node 10+](https://nodejs.org/)
+3. Install [Myriad](https://github.com/1Computer1/myriad/)
+    - This will require [GHC and Cabal](https://www.haskell.org/).
     - You will also have to configure Myriad, see its repository.
-0. Fill out `config.json`
+4. Fill out `config.json`
     - `owner` The owner(s) of the bot. Use an array for multiple owners.
     - `token` The bot token.
     - `prefix` The prefix for commands.
     - `codePrefix` The prefix for code evaluation.
     - `myriad` The port that Myriad is running on.
-0. Run `npm i`
+5. Run `npm i`
 
 ## Running
 
-0. Run `myriad --config path/to/config.dhall`
-0. Run `node .`
+1. Run `myriad --config path/to/config.dhall`
+2. Run `node .`
