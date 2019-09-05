@@ -1,11 +1,13 @@
 # Comp_iler
 
 Sandboxed code execution discord bot.  
-[Invite the bot!](https://discordapp.com/oauth2/authorize?client_id=555066722969714728&scope=bot)  
+
+[**Invite the bot!**](https://discordapp.com/oauth2/authorize?client_id=555066722969714728&scope=bot)  
+*Not all languages are enabled on the public bot.*  
 
 ## Usage
 
-````
+````cpp
 >```cpp
 #include <iostream>
 
@@ -16,7 +18,7 @@ int main()
 ```
 ````
 
-```
+```py
 >`py print('hello world')`
 ```
 
@@ -74,5 +76,5 @@ The container is locked down, so there is no networking, limited memory and CPU 
 
 ## Running
 
-1. Run `myriad --config path/to/config.dhall`
+1. Run `myriad --config /path/to/config.dhall --languages /path/to/languages/`
 2. Run `node .`
