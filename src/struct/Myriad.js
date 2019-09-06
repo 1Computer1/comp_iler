@@ -21,15 +21,17 @@ class Myriad {
         });
 
         if (!response.ok) {
-            if (response.status === 404 && response.statusText === 'Not Found') {
-                return [false, 'Invalid language'];
+            const status = response.status;
+            const text = await response.text();
+            if (status === 404 && text === `Language ${language} was not found`) {
+                return [false, `Invalid language ${language}`];
             }
 
-            if (response.status === 500 && response.statusText === 'Evaluation failed') {
+            if (status === 500 && text === 'Evaluation failed') {
                 return [false, 'Evaluation failed'];
             }
 
-            if (response.status === 504 && response.statusText === 'Evaluation timed out') {
+            if (status === 504 && text === 'Evaluation timed out') {
                 return [false, 'Evaluation timed out'];
             }
 
