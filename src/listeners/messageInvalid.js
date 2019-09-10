@@ -23,20 +23,28 @@ class MessageInvalidListener extends Listener {
 
         let reaction;
         if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
-            await Promise.all(message.reactions.filter(r => r.me).map(r => r.users.remove()));
-            reaction = await message.react('📝');
+            try {
+                await Promise.all(message.reactions.filter(r => r.me).map(r => r.users.remove()));
+                reaction = await message.react('📝');
+            } catch (e) {
+                // Ignore.
+            }
         }
 
         const [ok, response] = await this.client.myriad.postEval(parse.language, parse.code);
         if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
-            if (reaction) {
-                reaction.users.remove();
-            }
+            try {
+                if (reaction) {
+                    reaction.users.remove();
+                }
 
-            if (ok) {
-                message.react('✔');
-            } else {
-                message.react('✖');
+                if (ok) {
+                    message.react('✔');
+                } else {
+                    message.react('✖');
+                }
+            } catch (e) {
+                // Ignore.
             }
         }
 
