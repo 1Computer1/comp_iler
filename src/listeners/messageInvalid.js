@@ -50,11 +50,11 @@ class MessageInvalidListener extends Listener {
 
         const output = `\`\`\`\n${response}\n\`\`\``;
         if (output.length >= 2000) {
-            const key = await fetch('https://hastebin.com/documents', { method: 'POST', body: response })
+            const key = await fetch('https://hasteb.in/documents', { method: 'POST', body: response })
                 .then(res => res.json())
                 .then(json => json.key);
 
-            return message.util.send(`Output was too long: <https://hastebin.com/${key}>`);
+            return message.util.send(`Output was too long: <https://hasteb.in/${key}>`);
         }
 
         return message.util.send(output);
