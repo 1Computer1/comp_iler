@@ -60,6 +60,7 @@ const entries = [
     ['cpp', ['cpp']],
     ['csharp', ['csharp', 'cs']],
     ['elixir', ['elixir']],
+    ['erlang', ['erlang', 'erl']],
     ['fsharp', ['fsharp', 'fs']],
     ['go', ['golang', 'go']],
     ['haskell', ['haskell', 'hs']],
