@@ -35,13 +35,13 @@ class MessageInvalidListener extends Listener {
         if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
             try {
                 if (reaction) {
-                    reaction.users.remove();
+                    await reaction.users.remove();
                 }
 
                 if (ok) {
-                    message.react('✔');
+                    await message.react('✔');
                 } else {
-                    message.react('✖');
+                    await message.react('✖');
                 }
             } catch (e) {
                 // Ignore.
