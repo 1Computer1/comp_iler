@@ -42,6 +42,7 @@ You can see all the possible codes using the `languages` command in the bot.
 - `java` Java
 - `js` JavaScript
 - `julia` Julia
+- `kotlin` Kotlin
 - `lisp` Racket
 - `lua` Lua
 - `ocaml` OCaml
