@@ -31,6 +31,8 @@ class MessageInvalidListener extends Listener {
             }
         }
 
+        const place = message.guild ? message.guild.id : 'DMs';
+        console.log(`[Info] User ${message.author.id} in ${place} (${parse.language}):\n${parse.code}`);
         const [ok, response] = await this.client.myriad.postEval(parse.language, parse.code);
         if (!message.guild || message.channel.permissionsFor(this.client.user).has('ADD_REACTIONS')) {
             try {
