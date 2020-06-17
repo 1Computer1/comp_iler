@@ -24,34 +24,8 @@ int main()
 
 ## Supported Languages and Options
 
-One of the following language codes is set in `lang`.  
+A supported language code is set in `lang`.  
 You can see all the possible codes using the `languages` command in the bot.  
-
-- `apl` APL
-- `bash` Bash
-- `bf` Brainfuck
-- `c` C
-- `clj` Clojure
-- `cpp` C++
-- `cs` C#
-- `elixir` Elixir
-- `fs` F#
-- `go` Go
-- `hs` Haskell
-- `idr` Idris
-- `java` Java
-- `js` JavaScript
-- `julia` Julia
-- `lisp` Racket
-- `lua` Lua
-- `ocaml` OCaml
-- `pas` Pascal
-- `php` PHP
-- `pl` Perl5
-- `prolog` Prolog
-- `py` Python
-- `rb` Ruby
-- `rs` Rust
 
 ## How it Works
 
@@ -62,10 +36,8 @@ The container is locked down, so there is no networking, limited memory and CPU 
 ## Setup
 
 1. Install [Docker 18+](https://www.docker.com/)
-2. Install [Node 10+](https://nodejs.org/)
-3. Install [Myriad](https://github.com/1Computer1/myriad/)
-    - This will require [GHC and Cabal](https://www.haskell.org/).
-    - You will also have to configure Myriad, see its repository.
+2. Install [Node 14+](https://nodejs.org/)
+3. Install [Myriad 0.4.0.0](https://github.com/1Computer1/myriad/)
 4. Fill out `config.json`
     - `owner` The owner(s) of the bot. Use an array for multiple owners.
     - `token` The bot token.
