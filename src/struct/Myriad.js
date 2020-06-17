@@ -56,7 +56,6 @@ const entries = [
     ['bash', ['bash', 'sh']],
     ['brainfuck', ['brainfuck', 'bf']],
     ['c', ['c']],
-    ['clojure', ['clojure', 'clj']],
     ['cpp', ['cpp']],
     ['csharp', ['csharp', 'cs']],
     ['elixir', ['elixir']],
@@ -69,15 +68,18 @@ const entries = [
     ['javascript', ['javascript', 'js']],
     ['julia', ['julia']],
     ['lua', ['lua']],
+    ['nim', ['nim', 'nimrod']],
     ['ocaml', ['ocaml', 'ml']],
     ['pascal', ['pascal', 'pas', 'freepascal']],
     ['perl', ['perl', 'pl']],
     ['php', ['php']],
     ['prolog', ['prolog']],
     ['python', ['python', 'py']],
+    ['r', ['r']],
     ['racket', ['lisp']],
     ['ruby', ['ruby', 'rb']],
-    ['rust', ['rust', 'rs']]
+    ['rust', ['rust', 'rs']],
+    ['typescript', ['typescript', 'ts']]
 ];
 
 Myriad.Languages = new Map(entries);
