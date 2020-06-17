@@ -8,7 +8,7 @@ Sandboxed code execution discord bot.
 ## Usage
 
 ````cpp
->```cpp
+$>```cpp
 #include <iostream>
 
 int main()
@@ -19,7 +19,7 @@ int main()
 ````
 
 ```py
->`py print('hello world')`
+$>`py print('hello world')`
 ```
 
 ## Supported Languages and Options
