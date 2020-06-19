@@ -39,7 +39,7 @@
 
 ## 1.6.0
 
-- Added `>cleanup` command.
+- Added `$>cleanup` command.
 - Changed JS to always use `-p` to evaluate expressions.
 
 ## 1.5.0
@@ -56,7 +56,7 @@
     - `parallel` to build and setup in parallel.
     - `cleanup` to periodically kill containers.
     - `cpus`, `memory`, `timeout`, `concurrent` can be per-compiler.
-- Added more info to the `>about` command.
+- Added more info to the `$>about` command.
 - Added logging about images and containers.
 - Changed folder names to use the current time.
 - Fixed `concurrent` option being ignored.
