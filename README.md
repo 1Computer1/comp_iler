@@ -2,8 +2,8 @@
 
 Sandboxed code execution discord bot.  
 
-[**Invite the bot!**](https://discordapp.com/oauth2/authorize?client_id=555066722969714728&scope=bot)  
-*Not all languages are enabled on the public bot.*  
+~~[**Invite the bot!**](https://discordapp.com/oauth2/authorize?client_id=555066722969714728&scope=bot)~~  
+*Bot is currently private.*  
 
 ## Usage
 
